@@ -1,0 +1,16 @@
+.content {
+  width: 100%;
+  border: 2px dashed rgba(0, 110, 255, 1);
+  min-height: 400px;
+  cursor: pointer;
+}
+
+.content:hover {
+  background: rgba(0, 110, 255, 0.25);
+  border: 2px solid rgba(0, 110, 255, 1);
+}
+
+h4 {
+  color: rgba(0, 110, 255, 1);
+  padding-top: 120px;
+}

@@ -1,24 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Builder from "./Builder/Builder";
+import "./App.css";
+
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faBold } from "@fortawesome/free-solid-svg-icons";
+import { faItalic } from "@fortawesome/free-solid-svg-icons";
+import { faUnderline } from "@fortawesome/free-solid-svg-icons";
+import { faCode } from "@fortawesome/free-solid-svg-icons";
+import { faListUl } from "@fortawesome/free-solid-svg-icons";
+import { faListOl } from "@fortawesome/free-solid-svg-icons";
+
+library.add(faBold);
+library.add(faItalic);
+library.add(faUnderline);
+library.add(faCode);
+library.add(faListUl);
+library.add(faListOl);
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <h1>Email Builder</h1>
+      <Builder />
     </div>
   );
 }

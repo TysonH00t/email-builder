@@ -1,0 +1,9 @@
+.gridContainer {
+  width: 360px;
+  min-height: 100px;
+  background-color: #fff;
+  border: 1px solid black;
+  margin: 10px 0;
+  top: 150%;
+  left: 0;
+}

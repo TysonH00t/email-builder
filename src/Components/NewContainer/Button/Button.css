@@ -1,0 +1,31 @@
+.gridThird {
+  border-left: 1px solid #ccc;
+  border-right: 0px;
+  border-top: 0px;
+  border-bottom: 0px;
+  background: white;
+  width: 120px;
+  float: left;
+  line-height: 80px;
+  font-weight: 800;
+  cursor: pointer;
+  margin: 10px 0;
+}
+
+.gridThird:nth-child(1) {
+  border-left: 0px;
+}
+
+.gridThird:hover {
+  background: #ccc;
+  line-height: 100px;
+  margin: 0;
+}
+
+.gridThird:nth-child(1):hover + .gridThird:nth-child(2) {
+  border-left: 0px;
+}
+
+.gridThird:nth-child(2):hover + .gridThird:nth-child(3) {
+  border-left: 0px;
+}
