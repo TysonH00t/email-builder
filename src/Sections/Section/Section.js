@@ -17,19 +17,22 @@ class Section extends Component {
     switch (this.props.division) {
         case "whole":
           SecDiv = (
-            <div className="whole">
-              {/* <Text /> */}
-              <Content />
+            <div className="outer">
+              <div className="whole">
+                {/* <Text /> */}
+                <Content />
+              </div>
             </div>
           );
           break;
         case "half":
           SecDiv = (
-            <div>
+            <div className="outer">
               <div className="half">
                 {/* <Text /> */}
                 <Content />
               </div>
+              <div className="divider"></div>
               <div className="half">
                 {/* <Text /> */}
                 <Content />
@@ -39,7 +42,7 @@ class Section extends Component {
           break;
         case "third":
           SecDiv = (
-            <div>
+            <div className="outer">
               <div className="third">
                 {/* <Text /> */}
                 <Content />
