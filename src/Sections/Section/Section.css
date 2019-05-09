@@ -1,40 +1,48 @@
 .outer {
   background: white;
-  padding: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 50px;
+  padding-top: 20px;
   border-bottom: 2px solid darkgrey;
+  position: relative;
 }
 
-.divider {
+.ground {
   display: inline-block;
-  width: 4px;
-  height: 100px;
-  background: orange;
+  width: 0px;
 }
 
 .whole {
+  padding-top: 30px;
   width: 1180px;
-  
   background: white;
   margin: 0 auto;
   min-height: 400px;
 }
-
+/* Half Section */
 .half {
-  width: 565px;
   display: inline-block;
   background: white;
   min-height: 400px;
-  
 }
 
 .half:nth-child(1) {
-  padding-right: 23px;
+  margin-right: 23px;
 }
 
 .half:nth-child(3) {
-  padding-left: 23px;
+  margin-left: 23px;
 }
 
+.halfDivider {
+  position: absolute;
+  top: 240px;
+  left: 250px;
+  z-index: 1;
+  background: transparent;
+}
+/* Third Section */
 .third {
   width: 360px;
   display: inline-block;
@@ -46,10 +54,64 @@
   padding-right: 25px;
 }
 
-.third:nth-child(2) {
+.third:nth-child(3) {
   padding-left: 25px;
   padding-right: 25px;
 }
-.third:nth-child(3) {
+.third:nth-child(5) {
   padding-left: 25px;
+}
+
+.thirdDividerL {
+  position: absolute;
+  top: 240px;
+  left: 45px;
+  z-index: 1;
+  background: transparent;
+}
+
+.thirdDividerR {
+  position: absolute;
+  top: 240px;
+  right: 40px;
+  z-index: 1;
+  background: transparent;
+}
+
+/*Styling Range*/
+
+input[type="range"] {
+  /*removes default webkit styles*/
+  -webkit-appearance: none;
+  pointer-events: none;
+  /*fix for FF unable to apply focus style bug */
+
+  /*required for proper track sizing in FF*/
+  width: 780px;
+}
+
+input[type="range"]::-moz-range-track {
+  width: 780px;
+  min-height: 400px;
+  background: transparent;
+  border: none;
+  border-radius: 3px;
+}
+input[type="range"]::-moz-range-thumb {
+  border: none;
+  min-height: 400px;
+  width: 4px;
+  border-radius: 0%;
+  background: lightgrey;
+  pointer-events: auto;
+}
+input[type="range"]::-moz-range-thumb:hover {
+  background: rgba(0, 110, 255, 0.8);
+  cursor: pointer;
+  width: 4px;
+}
+
+/*hide the outline behind the border*/
+input[type="range"]:-moz-focusring {
+  outline-offset: -1px;
 }
