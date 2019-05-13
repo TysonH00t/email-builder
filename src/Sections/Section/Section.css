@@ -38,7 +38,7 @@
 .halfDivider {
   position: absolute;
   top: 240px;
-  left: 250px;
+  left: 249px;
   z-index: 1;
   background: transparent;
 }
@@ -65,7 +65,7 @@
 .thirdDividerL {
   position: absolute;
   top: 240px;
-  left: 45px;
+  left: 228px;
   z-index: 1;
   background: transparent;
 }
@@ -73,7 +73,7 @@
 .thirdDividerR {
   position: absolute;
   top: 240px;
-  right: 40px;
+  right: 228px;
   z-index: 1;
   background: transparent;
 }
@@ -87,16 +87,31 @@ input[type="range"] {
   /*fix for FF unable to apply focus style bug */
 
   /*required for proper track sizing in FF*/
+}
+
+.halfWidth input[type="range"] {
   width: 780px;
 }
 
+.thirdWidth input[type="range"] {
+  width: 410px;
+}
+
 input[type="range"]::-moz-range-track {
-  width: 780px;
   min-height: 400px;
   background: transparent;
   border: none;
   border-radius: 3px;
 }
+
+.halfWidth input[type="range"]::-moz-range-track {
+  width: 780px;
+}
+
+.thirdWidth input[type="range"]::-moz-range-track {
+  width: 410px;
+}
+
 input[type="range"]::-moz-range-thumb {
   border: none;
   min-height: 400px;

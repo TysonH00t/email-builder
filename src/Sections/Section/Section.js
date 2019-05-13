@@ -7,13 +7,16 @@ import Measure from '../../Components/Measure/Measure'
 class Section extends Component {
 
   state = {
-    xHalfPos: 0,
-    xThirdPos: 0,
-    yThirdPos: 0
+    xPos: 0,
+    yPos: 0
   };
 
-  halfSlide = (e) => {
-      this.setState({xHalfPos: e.target.value});
+  xSlide = (e) => {
+      this.setState({xPos: e.target.value});
+}
+
+ySlide = (e) => {
+  this.setState({yPos: e.target.value});
 }
 
   render() {
@@ -21,6 +24,14 @@ class Section extends Component {
     
     
     let SecDiv = null;
+    let xMax = 205;
+    let yMin = 205;
+    if (Number(this.state.xPos) - Number(this.state.yPos)  > 199){
+      xMax = 205 - 40;
+      console.log(xMax)
+    }else {
+      xMax = 205;
+    }
 
     switch (this.props.division) {
         case "whole":
@@ -36,16 +47,18 @@ class Section extends Component {
         case "half":
           SecDiv = (
             <div className="outer">
-              <div style={{width: Number(this.state.xHalfPos) + 565}} className="half">
-              <Measure>{ Number(this.state.xHalfPos) + 565}</Measure>
+              <div style={{width: Number(this.state.xPos) + 565}} className="half">
+              <Measure>{ Number(this.state.xPos) + 565} px</Measure>
                 {/* <Text /> */}
                 <Content />
               </div>
               <div className="ground">
-                  <input onChange={this.halfSlide} className="halfDivider" step={2} min={-390} max={390} type="range" />
+                  <div className="halfWidth">
+                    <input onChange={this.xSlide} className="halfDivider" step={2} min={-390} max={390} type="range" />
+                  </div>
               </div>
-              <div style={{width: (-this.state.xHalfPos) + 565}} className="half">
-              <Measure>{-this.state.xHalfPos + 565}</Measure>
+              <div style={{width: (-this.state.xPos) + 565}} className="half">
+              <Measure>{-this.state.xPos + 565} px</Measure>
                 {/* <Text /> */}
                 <Content />
               </div>
@@ -55,21 +68,29 @@ class Section extends Component {
         case "third":
           SecDiv = (
             <div className="outer">
-              <div className="third">
+              <div style={{width: Number(this.state.xPos) + 360}} className="third">
+              <Measure>{Number(this.state.xPos) + 360} px</Measure>
                 {/* <Text /> */}
                 <Content />
               </div>
               <div className="ground">
-                  <input onChange={this.halfSlide} className="thirdDividerL" step={2} min={-390} max={390} type="range" />
+                  <div className="thirdWidth">
+                    <input onChange={this.xSlide} className="thirdDividerL" step={2} min={-205} max={xMax} type="range" />
+                  </div>
               </div>
-              <div className="third">
+              <div style={{width: 360 + Number(this.state.yPos) - Number(this.state.xPos)}} className="third">
+              <Measure>{360 + Number(this.state.yPos) - Number(this.state.xPos)} px</Measure>
                 {/* <Text /> */}
                 <Content />
               </div>
               <div className="ground">
-                  <input onChange={this.halfSlide} className="thirdDividerR" step={2} min={-390} max={390} type="range" />
+                  <div className="thirdWidth">
+                    <input onChange={this.ySlide} className="thirdDividerR" step={2} min={-yMin} max={205} type="range" />
+                  </div>
               </div>
-              <div className="third">
+              <div style={{width: 360 - (this.state.yPos)}} className="third">
+              <Measure>{360 - (this.state.yPos)} px</Measure>
+              {/*  */}
                 {/* <Text /> */}
                 <Content />
               </div>
