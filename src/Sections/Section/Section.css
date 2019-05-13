@@ -93,9 +93,9 @@ input[type="range"] {
   width: 780px;
 }
 
-.thirdWidth input[type="range"] {
+/* .thirdWidth input[type="range"] {
   width: 410px;
-}
+} */
 
 input[type="range"]::-moz-range-track {
   min-height: 400px;
@@ -108,9 +108,9 @@ input[type="range"]::-moz-range-track {
   width: 780px;
 }
 
-.thirdWidth input[type="range"]::-moz-range-track {
+/* .thirdWidth input[type="range"]::-moz-range-track {
   width: 410px;
-}
+} */
 
 input[type="range"]::-moz-range-thumb {
   border: none;
