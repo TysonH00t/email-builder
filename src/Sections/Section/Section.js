@@ -8,7 +8,7 @@ class Section extends Component {
   state = {
     xPos: 0,
     yPos: 0,
-    xMax: 205
+    xMax: 0
   };
 
   xSlide = e => {
@@ -19,19 +19,33 @@ class Section extends Component {
     this.setState({ yPos: e.target.value });
   };
 
+  slider = () => {
+    return this.setState({ xMax: this.state.xMax + 103 });
+  };
+
   render() {
     let SecDiv = null;
-    let yMin = 205;
-    if (Number(this.state.xPos) - Number(this.state.yPos) > 205) {
-      this.setState({ xPos: this.state.xPos - 40 });
-      this.setState({ xMax: this.state.xMax - 40 });
-      console.log(this.state.xMax);
-    } else if (
+    if (
+      this.state.xPos > 101 &&
+      Number(this.state.yPos) > 1 &&
       Number(this.state.xPos) - Number(this.state.yPos) < 205 &&
-      this.state.xMax < 205
+      Number(this.state.xMax) !== 103
     ) {
-      this.setState({ xMax: 205 });
-      console.log("set");
+      this.setState({ xMax: 103 });
+    } else if (
+      Number(this.state.xPos) < 101 &&
+      Number(this.state.yPos) > 0 &&
+      Number(this.state.xMax) !== 0
+    ) {
+      this.setState({ xMax: 0 });
+    }
+    if (
+      this.state.xPos < 0 &&
+      Number(this.state.yPos) < 1 &&
+      Number(this.state.xPos) - Number(this.state.yPos) < 205 &&
+      Number(this.state.xMax) !== -103
+    ) {
+      this.setState({ xMax: -103 });
     }
 
     switch (this.props.division) {
@@ -94,8 +108,9 @@ class Section extends Component {
                   className="thirdDividerL"
                   step={2}
                   min={-205}
-                  max={this.state.xMax}
-                  style={{ width: 205 + this.state.xMax }}
+                  max={103 + this.state.xMax}
+                  defaultValue={0}
+                  style={{ width: 308 + this.state.xMax }}
                   type="range"
                 />
               </div>
@@ -118,9 +133,10 @@ class Section extends Component {
                   onChange={this.ySlide}
                   className="thirdDividerR"
                   step={2}
-                  min={-yMin}
+                  min={-(102 + -this.state.xMax)}
                   max={205}
-                  style={{ width: 410 }}
+                  defaultValue={0}
+                  style={{ width: 307 + -this.state.xMax }}
                   type="range"
                 />
               </div>
