@@ -1,6 +1,7 @@
 .content {
   width: 99.3%;
   border: 2px dashed rgba(0, 110, 255, 1);
+  line-height: 375px;
   min-height: 400px;
   cursor: pointer;
 }
@@ -12,5 +13,14 @@
 
 h4 {
   color: rgba(0, 110, 255, 1);
-  padding-top: 120px;
+}
+
+.tile {
+  width: 60px;
+  display: inline-block;
+  background: rgba(0, 110, 255, .1);
+  border: 2px solid rgba(0, 110, 255, 1);
+  height: 60px;
+  margin: 5px;
+  line-height: 60px;
 }

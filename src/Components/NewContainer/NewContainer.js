@@ -1,18 +1,19 @@
 import React from "react";
+import "./NewContainer.css"
 import Container from "./Container/Container";
 import Button from "./Button/Button";
 
 const NewContainer = props => {
   return (
     <Container>
-      <Button clicked={() => props.clicked("whole")} btnType="gridThird">
-        Whole
+      <Button clicked={() => props.clicked("whole")} btnType="gridThird one">
+        <div className="one"></div>
       </Button>
       <Button clicked={() => props.clicked("half")} btnType="gridThird">
-        Half
+      <div className="two"></div><div className="two"></div>
       </Button>
       <Button clicked={() => props.clicked("third")} btnType="gridThird">
-        Thirds
+      <div className="three"></div><div className="three"></div><div className="three"></div>
       </Button>
     </Container>
   );
