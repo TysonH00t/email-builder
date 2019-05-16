@@ -124,6 +124,7 @@ class Text extends React.Component {
     }
     return (
       <button
+      className="button"
         style={{ color: foreground }}
         active={isActive}
         onMouseDown={event => this.onClickMark(event, type)}
