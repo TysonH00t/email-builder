@@ -28,19 +28,11 @@ class Content extends Component {
       contentDecider = <Text />;
       break;
       case "image" :
-      contentDecider = <h4>Image</h4>
+      contentDecider = <h4>Image</h4>;
       break;
       default : contentDecider = <div onClick={() => this.setState({contentShow: 'contentShow'})} className="content"><h4>Click to add content</h4></div>;
       break;
     }
-
-    // if (this.state.contentShow === true) {
-    //   contentDecider = (
-    //     <>
-    //   <button className="tile">Text</button>
-    //   <button className="tile">Image</button>
-    //   </>);
-    // }
 
     return (
       <>

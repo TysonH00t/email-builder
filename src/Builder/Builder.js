@@ -1,10 +1,12 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
 import Plus from "../Components/Plus/Plus";
 import NewContainer from "../Components/NewContainer/NewContainer";
 import Section from "../Sections/Section/Section";
 // import Text from "../Components/Text/Text";
 import "./Builder.css";
 // import Content from "../Content/Content";
+import * as actionTypes from '../store/actions';
 
 class Builder extends Component {
   state = {
@@ -56,4 +58,17 @@ class Builder extends Component {
   }
 }
 
-export default Builder;
+const mapStateToProps = state => {
+  return {
+    Secs: state.section
+  }
+}
+
+const mapDispatchTopProps = dispatch => {
+  return {
+    onSectionAdded: (secName) => dispatch({type: actionTypes.ADD_SECTION, sectionName: secName})
+    //onSectionAdded: (secName) => dispatch({type: actionTypes.ADD_SECTION, sectionName: secName})
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchTopProps)(Builder);
