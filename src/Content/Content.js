@@ -4,6 +4,8 @@ import './Content.css';
 import * as actionTypes from '../store/actions';
 import { connect } from 'react-redux';
 
+//import { Value } from 'slate'
+import Plain from 'slate-plain-serializer';
 
 class Content extends Component {
 
@@ -12,13 +14,23 @@ class Content extends Component {
 
 
   render() {
+     let newContent = () => {
+      content = <p className='pContent'>{Plain.serialize(this.props.content.value)}</p>
+     } 
 
-    let content = <button onClick={() => this.props.onContentShow(this.props.index)} className="content"><h4>Click to add content</h4></button>
 
-    if (this.props.displayContent === true) {
-      content = <p>somerandomecontent</p>
-      console.log(this.props.content.value)
+    let showContent = (e) => {
+      e.stopPropagation();
+      this.props.onContentShow(this.props.index, this.props.cIndex);
+  }
+
+    let content = <button onClick={showContent} className="content"><h4>Click to add content</h4></button>
+    console.log(this.props.currentSec + 'localindex' + this.props.index)
+    if (this.props.displayContent === true && this.props.currentSec === this.props.index) {
+      newContent()
     }
+
+    //&& this.props.currentSec.currentSection === this.props.index && this.props.currentSec.currentContent === this.props.cIndex
 
     return (
       <>
@@ -34,13 +46,15 @@ class Content extends Component {
 const mapStateToProps = state => {
   return {
     displayContent: state.displayContent,
-    content: state.currentText
+    content: state.currentText,
+    currentSec: state.currentSelection.currentSection,
+    currentCont: state.currentSelection.currentContent,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onContentShow: (secIndex) => dispatch({type: actionTypes.SHOW_CONTENT, index: secIndex}),
+    onContentShow: (secIndex, conIndex) => dispatch({type: actionTypes.SHOW_CONTENT, index: secIndex, cIndex: conIndex}),
   }
 }
 

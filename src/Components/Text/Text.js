@@ -10,9 +10,13 @@ const Text = (props) => {
         //props.contentShow();
     }
 
+    let combinedFunc = () => {
+      props.contentShow(); 
+      props.transferContent();
+    }
 
     return(
-    <div onClick={() => {props.contentShow(); props.transferContent()}} className="background">
+    <div onClick={combinedFunc} className="background">
         <div onClick={stopEvent} className='text'>
             <TextEditor />
         </div>

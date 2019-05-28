@@ -19,7 +19,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     //console.log(action.type + state.contentShow)
-    console.log(state.currentSelection)
+    //console.log(state.currentSelection)
     switch(action.type) {
         case actionTypes.SHOW_GRID: return {
             ...state,
@@ -31,7 +31,7 @@ const reducer = (state = initialState, action) => {
             contentShow: !state.contentShow,
             currentSelection: {
                 currentSection: action.index,
-                currentContent: 0
+                currentContent: action.cIndex
             }
         }
         

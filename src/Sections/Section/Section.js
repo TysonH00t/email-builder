@@ -54,7 +54,7 @@ class Section extends Component {
           <div className="outer">
             <div className="whole">
               {/* <Text /> */}
-              <Content index={this.props.index} />
+              <Content cIndex={0} index={this.props.index} />
             </div>
           </div>
         );
@@ -68,7 +68,7 @@ class Section extends Component {
             >
               <Measure>{Number(this.state.xPos) + 565} px</Measure>
               {/* <Text /> */}
-              <Content index={this.props.index} />
+              <Content cIndex={0} index={this.props.index} />
             </div>
             <div className="ground">
               <div className="halfWidth">
@@ -85,7 +85,7 @@ class Section extends Component {
             <div style={{ width: -this.state.xPos + 565 }} className="half">
               <Measure>{-this.state.xPos + 565} px</Measure>
               {/* <Text /> */}
-              <Content index={this.props.index} />
+              <Content cIndex={1} index={this.props.index} />
             </div>
           </div>
         );
@@ -99,7 +99,7 @@ class Section extends Component {
             >
               <Measure>{Number(this.state.xPos) + 360} px</Measure>
               {/* <Text /> */}
-              <Content index={this.props.index} />
+              <Content cIndex={0} index={this.props.index} />
             </div>
             <div className="ground">
               <div className="thirdWidth">
@@ -125,7 +125,7 @@ class Section extends Component {
                 {360 + Number(this.state.yPos) - Number(this.state.xPos)} px
               </Measure>
               {/* <Text /> */}
-              <Content index={this.props.index} />
+              <Content cIndex={1} index={this.props.index} />
             </div>
             <div className="ground">
               <div className="thirdWidth">
@@ -145,7 +145,7 @@ class Section extends Component {
               <Measure>{360 - this.state.yPos} px</Measure>
               {/*  */}
               {/* <Text /> */}
-              <Content index={this.props.index} />
+              <Content cIndex={2} index={this.props.index} />
             </div>
           </div>
         );
