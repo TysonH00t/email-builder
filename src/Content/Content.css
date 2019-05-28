@@ -24,3 +24,7 @@ h4 {
   margin: 5px;
   line-height: 60px;
 }
+
+.tile:hover {
+  cursor: pointer;
+}

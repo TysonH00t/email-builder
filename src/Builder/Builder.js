@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Plus from "../Components/Plus/Plus";
 import NewContainer from "../Components/NewContainer/NewContainer";
 import Section from "../Sections/Section/Section";
-// import Text from "../Components/Text/Text";
+import Text from "../Components/Text/Text";
 import "./Builder.css";
 // import Content from "../Content/Content";
 import * as actionTypes from '../store/actions';
@@ -16,39 +16,35 @@ class Builder extends Component {
 
   //Show or hide NewContainer
   showGrid = () => {
-    let grid = this.state.gridShowing;
+    let grid = this.props.gridShow;
     grid = !grid;
     this.setState({ gridShowing: grid });
   };
 
-  //Add new section to Builder
-  addSection = division => {
-    this.setState({
-      Sections: [...this.state.Sections, division]
-    });
-    this.showGrid();
-    console.log(this.state.Sections);
-  };
-
   render() {
     let sectionGrid = null;
+    let content = null;
 
-    if (this.state.gridShowing) {
-      sectionGrid = <NewContainer clicked={this.addSection} />;
+    if (this.props.contentShow) {
+      content = <Text contentShow={this.props.onContentShow} transferContent={this.props.transferContent} displayContent={this.props.displayContent} />
+    }
+
+    if (this.props.gridShow) {
+      sectionGrid = <NewContainer clicked={this.props.onSectionAdded} />;
     }
 
     return (
       <div className="body">
+        {/* <Text /> */}
         <div className="builder">
-          {/* <Section /> */}
-          {this.state.Sections.map((section, index) => (
-            <Section key={index} division={this.state.Sections[index]} />
+        {content}
+          {this.props.Secs.map((section,index) => (
+            <Section key={index + section.division} index={index} division={section.division} x={this.props.onSectionRemoved} />
           ))}
-          {/* <Text /> */}
           <div className="container">
             <Plus
-              gridShowing={this.state.gridShowing}
-              showGrid={this.showGrid}
+              gridShowing={this.props.gridShow}
+              showGrid={this.props.onGridShow}
             />
             {sectionGrid}
           </div>
@@ -60,15 +56,21 @@ class Builder extends Component {
 
 const mapStateToProps = state => {
   return {
-    Secs: state.section
+    Secs: state.sections,
+    gridShow: state.gridShowing,
+    contentShow: state.contentShow,
+    displayContent: state.displayContent
   }
 }
 
-const mapDispatchTopProps = dispatch => {
+const mapDispatchToProps = dispatch => {
   return {
-    onSectionAdded: (secName) => dispatch({type: actionTypes.ADD_SECTION, sectionName: secName})
-    //onSectionAdded: (secName) => dispatch({type: actionTypes.ADD_SECTION, sectionName: secName})
+    transferContent: () => dispatch ({type: actionTypes.DISPLAY_CONTENT}),
+    onGridShow: () => dispatch({type: actionTypes.SHOW_GRID}),
+    onContentShow: () => dispatch({type: actionTypes.SHOW_CONTENT}),
+    onSectionAdded: (secName) => dispatch({type: actionTypes.ADD_SECTION, sectionName: secName}),
+    onSectionRemoved: (secIndex) => dispatch({type: actionTypes.REMOVE_SECTION, index: secIndex}),
   }
 }
 
-export default connect(mapStateToProps, mapDispatchTopProps)(Builder);
+export default connect(mapStateToProps, mapDispatchToProps)(Builder);

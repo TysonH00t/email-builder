@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./Section.css";
 import Content from "../../Content/Content";
 import Measure from "../../Components/Measure/Measure";
-// import Text from "../../Components/Text/Text";
+import X from '../../Components/X/X';
 
 class Section extends Component {
   state = {
@@ -54,7 +54,7 @@ class Section extends Component {
           <div className="outer">
             <div className="whole">
               {/* <Text /> */}
-              <Content />
+              <Content index={this.props.index} />
             </div>
           </div>
         );
@@ -68,7 +68,7 @@ class Section extends Component {
             >
               <Measure>{Number(this.state.xPos) + 565} px</Measure>
               {/* <Text /> */}
-              <Content />
+              <Content index={this.props.index} />
             </div>
             <div className="ground">
               <div className="halfWidth">
@@ -85,7 +85,7 @@ class Section extends Component {
             <div style={{ width: -this.state.xPos + 565 }} className="half">
               <Measure>{-this.state.xPos + 565} px</Measure>
               {/* <Text /> */}
-              <Content />
+              <Content index={this.props.index} />
             </div>
           </div>
         );
@@ -99,7 +99,7 @@ class Section extends Component {
             >
               <Measure>{Number(this.state.xPos) + 360} px</Measure>
               {/* <Text /> */}
-              <Content />
+              <Content index={this.props.index} />
             </div>
             <div className="ground">
               <div className="thirdWidth">
@@ -125,7 +125,7 @@ class Section extends Component {
                 {360 + Number(this.state.yPos) - Number(this.state.xPos)} px
               </Measure>
               {/* <Text /> */}
-              <Content />
+              <Content index={this.props.index} />
             </div>
             <div className="ground">
               <div className="thirdWidth">
@@ -145,7 +145,7 @@ class Section extends Component {
               <Measure>{360 - this.state.yPos} px</Measure>
               {/*  */}
               {/* <Text /> */}
-              <Content />
+              <Content index={this.props.index} />
             </div>
           </div>
         );
@@ -153,8 +153,7 @@ class Section extends Component {
       default:
         SecDiv = null;
     }
-
-    return <>{SecDiv}</>;
+    return <div className="frame"><X index={this.props.index} />{SecDiv}</div>;
   }
 }
 

@@ -1,3 +1,7 @@
+.frame {
+  position: relative;
+}
+
 .outer {
   background: white;
   padding-left: 50px;
