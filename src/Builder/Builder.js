@@ -26,7 +26,7 @@ class Builder extends Component {
     let content = null;
 
     if (this.props.contentShow) {
-      content = <Text contentShow={this.props.onContentShow} transferContent={this.props.transferContent} displayContent={this.props.displayContent} />
+      content = <Text />
     }
 
     if (this.props.gridShow) {
@@ -59,15 +59,13 @@ const mapStateToProps = state => {
     Secs: state.sections,
     gridShow: state.gridShowing,
     contentShow: state.contentShow,
-    displayContent: state.displayContent
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    transferContent: () => dispatch ({type: actionTypes.DISPLAY_CONTENT}),
     onGridShow: () => dispatch({type: actionTypes.SHOW_GRID}),
-    onContentShow: () => dispatch({type: actionTypes.SHOW_CONTENT}),
+    onContentShow: () => dispatch({type: actionTypes.SHOW_CONTENT, index: 0, cIndex: 0}),
     onSectionAdded: (secName) => dispatch({type: actionTypes.ADD_SECTION, sectionName: secName}),
     onSectionRemoved: (secIndex) => dispatch({type: actionTypes.REMOVE_SECTION, index: secIndex}),
   }

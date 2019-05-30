@@ -7,8 +7,9 @@ const initialState = {
     contentShow: false,
     displayContent: false,
     currentSelection: {
-        currentSection: 0,
-        currentContent: 0,
+        currentSection: null,
+        currentContent: null,
+        contentNumber: null,
     },
     sections: [],
     currentText: {
@@ -31,7 +32,8 @@ const reducer = (state = initialState, action) => {
             contentShow: !state.contentShow,
             currentSelection: {
                 currentSection: action.index,
-                currentContent: action.cIndex
+                currentContent: action.cIndex,
+                contentNumber: action.cNum
             }
         }
         
@@ -42,13 +44,33 @@ const reducer = (state = initialState, action) => {
                 {   
                             index: state.sections.length + 1 + action.sectionName,
                             division: action.sectionName,
-                            content: []
                           },
             ...state.sections.slice(state.sections.length)],
             
             gridShowing: !state.gridShowing
             
         }
+
+        case actionTypes.DISPLAY_CONTENT: return {
+            
+            ...state,
+            ...state.sections.map((item, index) => {
+                if (index !== action.index) {
+                    return item
+                }
+                return {
+                    ...item,
+                    item: {index: action.item.index, division: action.item.division, content: [
+                        {
+                        visible: true,
+                        content: ''
+                    }
+                    ]}
+                }
+            })
+        }
+
+
         case actionTypes.REMOVE_SECTION: return {
 
             ...state,
@@ -60,11 +82,23 @@ const reducer = (state = initialState, action) => {
             ...state,
             currentText: action.content
         }
-        case actionTypes.DISPLAY_CONTENT: return {
+
+        case actionTypes.ACTIVATE_CONTENT: return {
             
             ...state,
-            displayContent: !state.displayContent
+            sections: [...state.sections.map((item, index) => {
+                if (index !== action.index) {
+                    return item
+                }
+                return {
+                    ...item,
+                     index: action.index, division: state.sections[action.index].division, content: action.cArray
+                    //{index: 0, division: 0, content: action.cArray}
+                }
+            })]
         }
+
+       
         
         default: 
         return state;
