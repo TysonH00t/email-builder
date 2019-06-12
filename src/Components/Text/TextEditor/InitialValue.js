@@ -1,5 +1,6 @@
 import { Value } from "slate";
 
+//Initial values
 const initialValue = Value.fromJSON({
   document: {
     nodes: [

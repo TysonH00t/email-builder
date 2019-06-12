@@ -1,6 +1,9 @@
 import React, {Component} from "react";
+
+//Import Components
 import './Content.css';
 
+//Import Redex
 import * as actionTypes from '../store/actions';
 import { connect } from 'react-redux';
 
@@ -9,15 +12,11 @@ import { connect } from 'react-redux';
 
 class Content extends Component {
 
-
- 
-
-
   render() {
-      
 
-let bool = false;
+    let bool = false;
     let showContent = (e) => {
+      //Stop event bubbling
       e.stopPropagation();
       this.props.onContentShow(this.props.index, this.props.cIndex, this.props.cNum);
       

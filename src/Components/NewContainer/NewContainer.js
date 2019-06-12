@@ -5,6 +5,7 @@ import Button from "./Button/Button";
 
 const NewContainer = props => {
   return (
+    //A scetion adder with 3 options
     <Container>
       <Button clicked={() => props.clicked("whole")} btnType="gridThird one">
         <div className="one"></div>

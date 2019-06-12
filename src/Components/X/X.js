@@ -9,6 +9,7 @@ class X extends Component {
   render () {
 
     return(
+      //Button that shows X, removes section on click
       <button
       onClick={() => this.props.onSectionRemoved(this.props.index)}
       className={"x"}
@@ -19,6 +20,7 @@ class X extends Component {
     }
   }
 
+  //Import Redux Functions
   const mapDispatchToProps = dispatch => {
     return {
       onSectionRemoved: (secIndex) => dispatch({type: actionTypes.REMOVE_SECTION, index: secIndex})

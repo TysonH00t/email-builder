@@ -11,6 +11,7 @@ class Section extends Component {
     xMax: 0
   };
 
+  //Set State = to the value of the slider
   xSlide = e => {
     this.setState({ xPos: e.target.value });
   };
@@ -25,6 +26,7 @@ class Section extends Component {
 
   render() {
     let SecDiv = null;
+    //Setting max and mins for each slider depending on where the other slider is
     if (
       this.state.xPos > 101 &&
       Number(this.state.yPos) > 1 &&
@@ -47,7 +49,7 @@ class Section extends Component {
     ) {
       this.setState({ xMax: -103 });
     }
-
+    //Setting up a switch to decide how many Content pieces will be contained in this Section
     switch (this.props.division) {
       case "whole":
         SecDiv = (

@@ -21,12 +21,15 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     //console.log(action.type + state.contentShow)
     //console.log(state.currentSelection)
+
+    //Show/Hide add section grid
     switch(action.type) {
         case actionTypes.SHOW_GRID: return {
             ...state,
             gridShowing: !state.gridShowing,
         }
 
+        //PLACEHOLDER -- WHAT DOES IT DO
         case actionTypes.SHOW_CONTENT: return {
             ...state,
             contentShow: !state.contentShow,
@@ -37,6 +40,7 @@ const reducer = (state = initialState, action) => {
             }
         }
         
+        //Add section (with proper content amounts) to builder
         case actionTypes.ADD_SECTION: return {
             
             ...state,
@@ -51,6 +55,7 @@ const reducer = (state = initialState, action) => {
             
         }
 
+        //PLACEHOLDER -- WHAT DOES IT DO
         case actionTypes.DISPLAY_CONTENT: return {
             
             ...state,
@@ -70,19 +75,21 @@ const reducer = (state = initialState, action) => {
             })
         }
 
-
+        //Remove section based on click
         case actionTypes.REMOVE_SECTION: return {
 
             ...state,
             sections: [...state.sections.slice(0, action.index), ...state.sections.slice(action.index + 1)]
         }
 
+        //Update content with current text editors content
         case actionTypes.UPDATE_CONTENT: return {
             
             ...state,
             currentText: action.content
         }
 
+        //PLACEHOLDER -- WHAT DOES IT DO
         case actionTypes.ACTIVATE_CONTENT: return {
             
             ...state,
