@@ -99,7 +99,7 @@ const reducer = (state = initialState, action) => {
                 }
                 return {
                     ...item,
-                     index: action.index, division: state.sections[action.index].division, content: action.cArray
+                     index: action.index, division: state.sections[action.index].division, content: action.cArray, random: "somethingrandom"
                     //{index: 0, division: 0, content: action.cArray}
                 }
             })]
