@@ -7,6 +7,7 @@ import React from "react";
 //import InitialValue from "./InitialValue";
 import { isKeyHotkey } from "is-hotkey";
 
+//import Redux and font awesome
 import * as actionTypes from '../../../store/actions';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

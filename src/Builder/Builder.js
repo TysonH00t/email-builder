@@ -74,7 +74,7 @@ const mapDispatchToProps = dispatch => {
   return {
     onGridShow: () => dispatch({type: actionTypes.SHOW_GRID}),
     onContentShow: () => dispatch({type: actionTypes.SHOW_CONTENT, index: 0, cIndex: 0}),
-    onSectionAdded: (secName) => dispatch({type: actionTypes.ADD_SECTION, sectionName: secName}),
+    onSectionAdded: (secName, contentNum) => dispatch({type: actionTypes.ADD_SECTION, sectionName: secName, contentNum: contentNum}),
     onSectionRemoved: (secIndex) => dispatch({type: actionTypes.REMOVE_SECTION, index: secIndex}),
   }
 }

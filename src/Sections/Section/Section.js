@@ -51,7 +51,7 @@ class Section extends Component {
     }
     //Setting up a switch to decide how many Content pieces will be contained in this Section
     switch (this.props.division) {
-      case "whole":
+      case "1":
         SecDiv = (
           <div className="outer">
             <div className="whole">
@@ -61,7 +61,7 @@ class Section extends Component {
           </div>
         );
         break;
-      case "half":
+      case "2":
         SecDiv = (
           <div className="outer">
             <div
@@ -92,7 +92,7 @@ class Section extends Component {
           </div>
         );
         break;
-      case "third":
+      case "3":
         SecDiv = (
           <div className="outer">
             <div

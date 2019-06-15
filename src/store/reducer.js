@@ -19,8 +19,6 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
-    //console.log(action.type + state.contentShow)
-    //console.log(state.currentSelection)
 
     //Show/Hide add section grid
     switch(action.type) {
@@ -48,6 +46,7 @@ const reducer = (state = initialState, action) => {
                 {   
                             index: state.sections.length + 1 + action.sectionName,
                             division: action.sectionName,
+                            content: action.contentNum,
                           },
             ...state.sections.slice(state.sections.length)],
             
@@ -99,7 +98,7 @@ const reducer = (state = initialState, action) => {
                 }
                 return {
                     ...item,
-                     index: action.index, division: state.sections[action.index].division, content: action.cArray, random: "somethingrandom"
+                     index: state.sections[action.index].index, division: state.sections[action.index].division, content: action.cArray
                     //{index: 0, division: 0, content: action.cArray}
                 }
             })]
