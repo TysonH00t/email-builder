@@ -19,7 +19,6 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
-
     //Show/Hide add section grid
     switch(action.type) {
         case actionTypes.SHOW_GRID: return {

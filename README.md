@@ -1,3 +1,5 @@
+Check this out for refrence https://canner.github.io/canner-slate-editor/?selectedKind=slate-md-editor&selectedStory=With%20HTML%20serializer&full=0&addons=1&stories=1&panelRight=0
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

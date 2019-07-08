@@ -7,6 +7,51 @@ import './Content.css';
 import * as actionTypes from '../store/actions';
 import { connect } from 'react-redux';
 
+import Html from 'slate-html-serializer';
+import Plain from 'slate-plain-serializer';
+
+const BLOCK_TAGS = {
+  p: 'paragraph',
+  li: 'list-item',
+  ul: 'bulleted-list',
+  ol: 'numbered-list',
+}
+
+const MARK_TAGS = {
+  strong: 'bold',
+  em: 'italic',
+  u: 'underline',
+}
+
+const rules = [
+  {
+    serialize(obj, children) {
+      if (obj.object == 'block') {
+        switch (obj.type) {
+          case 'paragraph':
+            return <p className={obj.data.get('className')}>{children}</p>
+        }
+      }
+    },
+  },
+  // Add a new rule that handles marks...
+  {
+    serialize(obj, children) {
+      if (obj.object == 'mark') {
+        switch (obj.type) {
+          case 'bold':
+            return <strong>{children}</strong>
+          case 'italic':
+            return <em>{children}</em>
+          case 'underline':
+            return <u>{children}</u>
+        }
+      }
+    },
+  },
+]
+
+const html = new Html({ rules })
 
 class Content extends Component {
 
@@ -15,7 +60,6 @@ class Content extends Component {
     //let bool = false;
     let showContent = (e) => {
       //Stop event bubbling
-      console.log("clicke")
       e.stopPropagation();
       this.props.onContentShow(this.props.index, this.props.cIndex, this.props.cNum);
       
@@ -23,30 +67,19 @@ class Content extends Component {
     let content = <button onClick={showContent} className="content"><h4>Click to add content</h4></button>
 
     let tempContent = this.props.sections[this.props.index];
-console.log(tempContent.content[this.props.cIndex])
     if (tempContent.content[this.props.cIndex].content !== '') {
-      content = <p>
-        {tempContent.content[this.props.cIndex].content}
-      </p>
+      // content = new Html ({
+      //   rules: rules,
+      //   defaultBlock: String | Object,
+      //   parseHtml:
+      // })
+      // content = Html.serialize(this.props.currentText.value);
+      // content = html.serialize(this.props.currentText.value);
+      content = String(html.serialize(this.props.currentText.value));
+      // content = <p>
+      //   {tempContent.content[this.props.cIndex].content}
+      // </p>
     }
-
-    // let newContent = () => {
-    //   //content = <p className='pContent'>{String(Plain.serialize(this.props.content.value))}</p>
-    //  //content = <p>Pretend Content</p>
-    //  bool = true;
-    //  } 
-    // //console.log(this.props.currentSec + 'localindex' + this.props.index + " " + this.props.cIndex)
-
-    // if (this.props.currentSec === this.props.index) {
-    //   newContent()
-    // }
-
-    // if (bool === true) {
-    //   content = <p className='pContent'>{String(Plain.serialize(this.props.content.value))}</p>
-    //   //content = <p>Pretend Content</p>
-    // }
-
-    // && this.props.currentSec === this.props.index && this.props.currentSec.currentSection === this.props.index && this.props.currentSec.currentContent === this.props.cIndex
 
     return (
       <>
@@ -62,7 +95,7 @@ console.log(tempContent.content[this.props.cIndex])
 const mapStateToProps = state => {
   return {
     sections: state.sections,
-    content: state.currentText,
+    currentText: state.currentText,
     currentSec: state.currentSelection.currentSection,
     currentCont: state.currentSelection.currentContent,
   }

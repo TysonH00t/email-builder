@@ -1,5 +1,4 @@
 import { Editor } from "slate-react";
-//import { Value } from "slate";
 
 import "./TextEditor.css";
 
