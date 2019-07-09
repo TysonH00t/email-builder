@@ -7,51 +7,6 @@ import './Content.css';
 import * as actionTypes from '../store/actions';
 import { connect } from 'react-redux';
 
-import Html from 'slate-html-serializer';
-import Plain from 'slate-plain-serializer';
-
-const BLOCK_TAGS = {
-  p: 'paragraph',
-  li: 'list-item',
-  ul: 'bulleted-list',
-  ol: 'numbered-list',
-}
-
-const MARK_TAGS = {
-  strong: 'bold',
-  em: 'italic',
-  u: 'underline',
-}
-
-const rules = [
-  {
-    serialize(obj, children) {
-      if (obj.object == 'block') {
-        switch (obj.type) {
-          case 'paragraph':
-            return <p className={obj.data.get('className')}>{children}</p>
-        }
-      }
-    },
-  },
-  // Add a new rule that handles marks...
-  {
-    serialize(obj, children) {
-      if (obj.object == 'mark') {
-        switch (obj.type) {
-          case 'bold':
-            return <strong>{children}</strong>
-          case 'italic':
-            return <em>{children}</em>
-          case 'underline':
-            return <u>{children}</u>
-        }
-      }
-    },
-  },
-]
-
-const html = new Html({ rules })
 
 class Content extends Component {
 
@@ -75,10 +30,10 @@ class Content extends Component {
       // })
       // content = Html.serialize(this.props.currentText.value);
       // content = html.serialize(this.props.currentText.value);
-      content = String(html.serialize(this.props.currentText.value));
-      // content = <p>
-      //   {tempContent.content[this.props.cIndex].content}
-      // </p>
+      // content = String(html.serialize(this.props.currentText.value));
+      content = <p>
+        {tempContent.content[this.props.cIndex].content}
+      </p>
     }
 
     return (
