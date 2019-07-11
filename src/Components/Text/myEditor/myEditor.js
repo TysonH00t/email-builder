@@ -3,7 +3,11 @@ import { Editor, EditorState, RichUtils, AtomicBlockUtils } from "draft-js";
 //import Editor from "draft-js-plugins-editor";
 import addLinkPluginPlugin from './plugins/addLinkPlugins';
 import BlockStyleToolbar, { getBlockStyle } from "./blockStyles/BlockStyleToolbar";
+import { convertToHTML } from 'draft-convert';
 import { mediaBlockRenderer } from "./entities/mediaBlockRenderer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import './myEditor.css'
 
 class myEditor extends Component {
   state = {
@@ -96,18 +100,38 @@ onAddImage = e => {
 };
 
   render() {
+
+    const html = convertToHTML({
+        styleToHTML: (style) => {
+          if (style === 'BOLD') {
+            return <span style={{color: 'blue'}} />;
+          }
+        },
+        blockToHTML: (block) => {
+          if (block.type === 'PARAGRAPH') {
+            return <p />;
+          }
+        },
+        entityToHTML: (entity, originalText) => {
+          if (entity.type === 'LINK') {
+            return <a href={entity.data.url}>{originalText}</a>;
+          }
+          return originalText;
+        }
+      })(this.state.editorState.getCurrentContent());
+
     return (
       <div>
           <BlockStyleToolbar
     editorState={this.state.editorState}
     onToggle={this.toggleBlockType}
     />
-        <button onClick={this.onUnderlineClick}>U</button>
+        <button onClick={this.onUnderlineClick}><FontAwesomeIcon icon="underline" /></button>
         <button onClick={this.onBoldClick}>
-          <b>B</b>
+        <FontAwesomeIcon icon="bold" />
         </button>
         <button onClick={this.onItalicClick}>
-          <em>I</em>
+        <FontAwesomeIcon icon="italic" />
         </button>
         <button id="link_url" onClick={this.onAddLink} className="add-link">
 					<i className="material-icons">attach_file</i>
@@ -115,15 +139,18 @@ onAddImage = e => {
         <button className="inline styleButton" onClick={this.onAddImage}>
 					<i class="material-icons">image</i>
 				</button>
-        <Editor
-        blockStyleFn={getBlockStyle}
-          editorState={this.state.editorState}
-          onChange={this.onChange}
-          handleKeyCommand={this.handleKeyCommand}
-          plugins={this.addLinkPluginPlugin}
-          blockRendererFn={mediaBlockRenderer}
-          ref="editor"
-        />
+        <div>
+            <Editor
+            blockStyleFn={getBlockStyle}
+              editorState={this.state.editorState}
+              onChange={this.onChange}
+              handleKeyCommand={this.handleKeyCommand}
+              plugins={this.addLinkPluginPlugin}
+              blockRendererFn={mediaBlockRenderer}
+              ref="editor"
+            />
+        </div>
+        {html}
       </div>
     );
   }
