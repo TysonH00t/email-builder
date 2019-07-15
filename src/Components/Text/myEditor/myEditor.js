@@ -34,21 +34,10 @@ class myEditor extends Component {
     return "not-handled";
   }
 
-  onUnderlineClick = () => {
-    this.onChange(
-      RichUtils.toggleInlineStyle(this.state.editorState, "UNDERLINE")
-    );
-  };
+  onStyleClick = (style) => {
+      this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, style));
 
-  onBoldClick = () => {
-    this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, "BOLD"));
-  };
-
-  onItalicClick = () => {
-    this.onChange(
-      RichUtils.toggleInlineStyle(this.state.editorState, "ITALIC")
-    );
-  };
+  }
 
   onAddLink = () => {
     const editorState = this.state.editorState;
@@ -122,24 +111,28 @@ onAddImage = e => {
 
     return (
       <div>
-          <BlockStyleToolbar
-    editorState={this.state.editorState}
-    onToggle={this.toggleBlockType}
-    />
-        <button onClick={this.onUnderlineClick}><FontAwesomeIcon icon="underline" /></button>
-        <button onClick={this.onBoldClick}>
-        <FontAwesomeIcon icon="bold" />
-        </button>
-        <button onClick={this.onItalicClick}>
-        <FontAwesomeIcon icon="italic" />
-        </button>
-        <button id="link_url" onClick={this.onAddLink} className="add-link">
-					<i className="material-icons">attach_file</i>
-		</button>
-        <button className="inline styleButton" onClick={this.onAddImage}>
-					<i class="material-icons">image</i>
-				</button>
-        <div>
+          <div className="Toolbar">
+              <BlockStyleToolbar
+        editorState={this.state.editorState}
+        onToggle={this.toggleBlockType}
+        />
+            <div className="Inline-Toolbar">
+                {/* <button onClick={() => this.onStyleClick('UNDERLINE')}><FontAwesomeIcon icon="underline" /></button>
+                <button onClick={() => this.onStyleClick('BOLD')}>
+                <FontAwesomeIcon icon="bold" />
+                </button>
+                <button onClick={() => this.onStyleClick('ITALIC')}>
+                <FontAwesomeIcon icon="italic" />
+                </button> */}
+                <button id="link_url" onClick={this.onAddLink} className="add-link">
+        					<i className="material-icons">attach_file</i>
+        		</button>
+                <button className="inline styleButton" onClick={this.onAddImage}>
+        					<i class="material-icons">image</i>
+        				</button>
+            </div>
+          </div>
+        <div className="Editor">
             <Editor
             blockStyleFn={getBlockStyle}
               editorState={this.state.editorState}

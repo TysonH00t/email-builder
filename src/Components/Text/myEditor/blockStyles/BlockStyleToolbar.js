@@ -2,26 +2,24 @@ import React from "react";
 import { EditorState, Editor, RichUtils, AtomicBlockUtils } from "draft-js";
 import BlockStyleButton from "./BlockStyleButton";
 import HeaderStyleDropdown from "./HeaderStyleDropdown";
+import './BlockStyleToolbar.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const BLOCK_TYPES = [
 	{ label: <FontAwesomeIcon icon="list-ul" />, style: "unordered-list-item" },
-	{ label: <FontAwesomeIcon icon="list-ol" />, style: "ordered-list-item" },
+    { label: <FontAwesomeIcon icon="list-ol" />, style: "ordered-list-item" },
+    { label: <FontAwesomeIcon icon="whatever" />, style: "UNDERLINE" },
 ];
 
 export const HEADER_TYPES = [
 	{ label: "H1", style: "header-one" },
 	{ label: "H2", style: "header-two" },
 	{ label: "H3", style: "header-three" },
-	{ label: "H4", style: "header-four" },
-	{ label: "H5", style: "header-five" },
-	{ label: "H6", style: "header-six" }
+	{ label: "P", style: "paragraph" },
 ];
 
 export function getBlockStyle(block) {
 	switch (block.getType()) {
-		case "blockquote":
-			return "RichEditor-blockquote";
 		default:
 			return null;
 	}
@@ -37,13 +35,15 @@ class BlockStyleToolbar extends React.Component {
 			.getType();
 
 		return (
-			<span className="RichEditor-controls">
-				<HeaderStyleDropdown
-					headerOptions={HEADER_TYPES}
-					active={blockType}
-					onToggle={this.props.onToggle}
-				/>
-
+			<div className="Block-Toolbar">
+				<div className="Header">
+                    <HeaderStyleDropdown
+                    					headerOptions={HEADER_TYPES}
+                    					active={blockType}
+                    					onToggle={this.props.onToggle}
+                    				/>
+                </div>
+<div className="Button-Spacing">
 				{BLOCK_TYPES.map(type => {
 					return (
 						<BlockStyleButton
@@ -55,8 +55,9 @@ class BlockStyleToolbar extends React.Component {
 							type={type}
 						/>
 					);
-				})}
-			</span>
+                })}
+                </div>
+			</div>
 		);
 	}
 }

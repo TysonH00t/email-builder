@@ -1,0 +1,14 @@
+.Button {
+  padding: 15px;
+  font-size: 18px;
+  color: grey;
+}
+
+.Button:hover {
+  background: #ddd;
+  cursor: pointer;
+}
+
+.Button-Active {
+  color: black;
+}

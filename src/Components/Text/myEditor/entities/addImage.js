@@ -1,4 +1,4 @@
-import React from "react";
+//import React from "react";
 import { EditorState, AtomicBlockUtils } from "draft-js";
 
 const addImage = editorState => {

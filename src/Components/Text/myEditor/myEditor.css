@@ -4,7 +4,7 @@ div.DraftEditor-root {
     min-height: 300px;
     width: 800px;
     overflow-y: auto;
-    margin: 10px auto;
+    margin: 0 auto;
   }
   div.DraftEditor-editorContainer,
   div.public-DraftEditor-content {
@@ -12,3 +12,41 @@ div.DraftEditor-root {
     height: 100%;
     padding: 5px;
   }
+
+  .Editor {
+    display: block;
+    margin: 0;
+    padding: 0;
+  }
+
+ .Inline-Toolbar {
+   display: inline-block;
+ }
+
+  .Toolbar {
+    background: white;
+    width: 780px;
+    border: none;
+    display: block;
+    margin: 0 auto;
+    padding: 10px;
+    text-align: left;
+  }
+
+  button {
+    background: white;
+    border: none;
+    padding: 15px;
+    font-size: 18px;
+    color: grey;
+  }
+  
+  button:hover {
+    background: #ddd;
+    cursor: pointer;
+  }
+
+  .Active {
+    color: black;
+  }
+  

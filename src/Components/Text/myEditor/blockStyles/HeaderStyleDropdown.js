@@ -1,4 +1,5 @@
 import React from "react";
+import './HeaderStyleDropdown.css';
 
 class HeaderStyleDropdown extends React.Component {
 	onToggle = event => {
@@ -8,7 +9,7 @@ class HeaderStyleDropdown extends React.Component {
 
 	render() {
 		return (
-			<select value={this.props.active} onChange={this.onToggle}>
+			<select className='Dropdown' value={this.props.active} onChange={this.onToggle}>
 				{this.props.headerOptions.map(heading => {
 					return <option value={heading.style}>{heading.label}</option>;
 				})}

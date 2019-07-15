@@ -1,0 +1,12 @@
+.Block-Toolbar {
+    display: inline-block;
+}
+
+.Header {
+    display: inline-block;
+}
+
+.Button-Spacing {
+    display: inline-block;
+    padding-left: 15px;
+}
