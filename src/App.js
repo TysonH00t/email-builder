@@ -9,6 +9,8 @@ import { faUnderline } from "@fortawesome/free-solid-svg-icons";
 import { faCode } from "@fortawesome/free-solid-svg-icons";
 import { faListUl } from "@fortawesome/free-solid-svg-icons";
 import { faListOl } from "@fortawesome/free-solid-svg-icons";
+import { faImages } from "@fortawesome/free-solid-svg-icons";
+import { faLink } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faBold);
 library.add(faItalic);
@@ -16,6 +18,8 @@ library.add(faUnderline);
 library.add(faCode);
 library.add(faListUl);
 library.add(faListOl);
+library.add(faImages);
+library.add(faLink);
 
 function App() {
   return (
