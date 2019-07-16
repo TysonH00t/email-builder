@@ -27,11 +27,31 @@ div.DraftEditor-root {
     background: white;
     width: 780px;
     border: none;
-    display: block;
+    display: inline-block;
     margin: 0 auto;
-    padding: 10px;
+    padding: 25px 10px;
     text-align: left;
   }
+
+  .Block-Toolbar {
+    display: inline-block;
+}
+
+.Header {
+    display: inline-block;
+}
+
+.Buttons {
+    display: inline-block;
+}
+
+.Controls {
+    display: inline-block;
+}
+
+  .Dropdown {
+    padding: 15px;
+}
 
   button {
     background: white;
@@ -50,3 +70,17 @@ div.DraftEditor-root {
     color: black;
   }
   
+  .Button {
+    padding: 15px;
+    font-size: 18px;
+    color: grey;
+  }
+  
+  .Button:hover {
+    background: #ddd;
+    cursor: pointer;
+  }
+  
+  .Button-Active {
+    color: black;
+  }

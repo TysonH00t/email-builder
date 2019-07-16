@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component }from "react";
 import { EditorState, Editor, RichUtils, AtomicBlockUtils } from "draft-js";
 import BlockStyleButton from "./BlockStyleButton";
 import HeaderStyleDropdown from "./HeaderStyleDropdown";
@@ -8,7 +8,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export const BLOCK_TYPES = [
 	{ label: <FontAwesomeIcon icon="list-ul" />, style: "unordered-list-item" },
     { label: <FontAwesomeIcon icon="list-ol" />, style: "ordered-list-item" },
-    { label: <FontAwesomeIcon icon="whatever" />, style: "UNDERLINE" },
 ];
 
 export const HEADER_TYPES = [
@@ -19,13 +18,15 @@ export const HEADER_TYPES = [
 ];
 
 export function getBlockStyle(block) {
+	console.log("run")
 	switch (block.getType()) {
 		default:
 			return null;
 	}
 }
 
-class BlockStyleToolbar extends React.Component {
+
+class BlockStyleToolbar extends Component {
 	render() {
 		const { editorState } = this.props;
 		const selection = editorState.getSelection();
@@ -44,18 +45,18 @@ class BlockStyleToolbar extends React.Component {
                     				/>
                 </div>
 <div className="Button-Spacing">
-				{BLOCK_TYPES.map(type => {
+				{BLOCK_TYPES.map((type, index) => {
 					return (
 						<BlockStyleButton
 							active={type.style === blockType}
 							label={type.label}
 							onToggle={this.props.onToggle}
 							style={type.style}
-							key={type.label}
+							key={type.label + index}
 							type={type}
 						/>
 					);
-                })}
+				})}
                 </div>
 			</div>
 		);
