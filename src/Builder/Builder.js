@@ -6,7 +6,7 @@ import NewContainer from "../Components/NewContainer/NewContainer";
 import Section from "../Sections/Section/Section";
 import Text from "../Components/Text/Text";
 import "./Builder.css";
-import Editor from '../Components/Text/myEditor/myEditor';
+//import Editor from '../Components/Text/myEditor/myEditor';
 //import TextEditor from '../Components/Text/TextEditor/TextEditor';
 
 //importing Redux
@@ -56,7 +56,7 @@ class Builder extends Component {
             {sectionGrid}
           </div>
         </div>
-        <Editor />
+        {/* <Editor /> */}
         {/* <TextEditor /> */}
       </div>
     );

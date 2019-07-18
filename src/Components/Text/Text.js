@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 //Import Components
-import TextEditor from "./TextEditor/TextEditor";
+import TextEditor from "./myEditor/myEditor";
 import "./Text.css";
 
 //Import Redux
