@@ -7,7 +7,7 @@ import "./Text.css";
 //Import Redux
 import * as actionTypes from "../../store/actions";
 import { connect } from "react-redux";
-import Plain from 'slate-plain-serializer';
+//import Plain from 'slate-plain-serializer';
 
 class Text extends Component {
   render() {
@@ -26,10 +26,12 @@ class Text extends Component {
       let contArray = [];
       for (let i = 0; i < this.props.currentContNum; i++) {
         if (i === this.props.currentCont) {
-          contArray.push({ display: true, content: String(Plain.serialize(this.props.currentText.value)) });
+          contArray.push({ display: true, content: this.props.currentText });
           //contArray.push({ display: false, content: "" });
         } else {
-          contArray.push({ display: true, content: this.props.sections[this.props.currentSec].content[i].content });
+          
+            contArray.push({ display: true, content: this.props.sections[this.props.currentSec].content[i].content });
+          
         }
       }
       this.props.activateContent(this.props.currentSec, contArray);

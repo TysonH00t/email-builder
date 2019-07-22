@@ -144,7 +144,6 @@ class myEditor extends Component {
         setTimeout(() => this.refs.editor.focus(), 0);
       }
     );
-    console.log(this.state.editorState.getSelection());
   };
 
   onLinkInputKeyDown = e => {
@@ -157,7 +156,6 @@ class myEditor extends Component {
     e.preventDefault();
     const { editorState } = this.state;
     const selection = editorState.getSelection();
-    console.log(this.state.urlValue);
     if (!selection.isCollapsed()) {
       this.setState({
         editorState: RichUtils.toggleLink(editorState, selection, null)
@@ -267,7 +265,6 @@ class myEditor extends Component {
             spellCheck={true}
           />
         </div>
-        {html}
       </div>
     );
   }

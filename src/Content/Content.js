@@ -7,6 +7,7 @@ import './Content.css';
 import * as actionTypes from '../store/actions';
 import { connect } from 'react-redux';
 
+import { convertToHTML } from "draft-convert";
 
 class Content extends Component {
 
@@ -31,9 +32,40 @@ class Content extends Component {
       // content = Html.serialize(this.props.currentText.value);
       // content = html.serialize(this.props.currentText.value);
       // content = String(html.serialize(this.props.currentText.value));
-      content = <p>
-        {tempContent.content[this.props.cIndex].content}
-      </p>
+      content = <div dangerouslySetInnerHTML={{__html: convertToHTML({
+        styleToHTML: style => {
+          if (style === "BOLD") {
+            return <span style={{ color: "blue" }} />;
+          }
+        },
+        blockToHTML: block => {
+          if (block.type === "PARAGRAPH") {
+            return { element: <p />, empty: <br /> };
+          }
+          if (block.type === "atomic") {
+            return {
+              start: "",
+              end: ""
+            };
+          }
+        },
+        entityToHTML: (entity, originalText) => {
+          if (entity.type === "LINK") {
+            return <a href={entity.data.url}>{originalText}</a>;
+          }
+          if (entity.type === "image") {
+            return <img alt="" src={entity.data.src} />;
+          }
+          return originalText;
+        }
+      })(tempContent.content[this.props.cIndex].content.editorState.getCurrentContent())}} />
+      
+      
+      
+
+      // content = <p>
+      //   {tempContent.content[this.props.cIndex].content}
+      // </p>
     }
 
     return (
