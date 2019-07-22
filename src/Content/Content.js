@@ -20,7 +20,7 @@ class Content extends Component {
       this.props.onContentShow(this.props.index, this.props.cIndex, this.props.cNum);
       
   }
-    let content = <button onClick={showContent} className="content"><h4>Click to add content</h4></button>
+    let content = <button onClick={showContent} className="content">+</button>
 
     let tempContent = this.props.sections[this.props.index];
     if (tempContent.content[this.props.cIndex].content !== '') {

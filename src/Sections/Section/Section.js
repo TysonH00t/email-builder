@@ -8,7 +8,8 @@ class Section extends Component {
   state = {
     xPos: 0,
     yPos: 0,
-    xMax: 0
+    xMax: 0,
+    sliderActive: false,
   };
 
   //Set State = to the value of the slider
@@ -23,6 +24,10 @@ class Section extends Component {
   slider = () => {
     return this.setState({ xMax: this.state.xMax + 103 });
   };
+
+  activateMeasure = () => {
+    this.setState({ sliderActive: !this.state.sliderActive })
+  }
 
   render() {
     let SecDiv = null;
@@ -68,13 +73,16 @@ class Section extends Component {
               style={{ width: Number(this.state.xPos) + 565 }}
               className="half"
             >
-              <Measure>{Number(this.state.xPos) + 565} px</Measure>
+            {!this.state.sliderActive ? null : <Measure>{Number(this.state.xPos) + 565} px</Measure>}
+              {/* <Measure>{Number(this.state.xPos) + 565} px</Measure> */}
               {/* <Text /> */}
               <Content cIndex={0} cNum={2} index={this.props.index} />
             </div>
             <div className="ground">
               <div className="halfWidth">
                 <input
+                  onMouseDown={this.activateMeasure}
+                  onMouseUp={this.activateMeasure}
                   onChange={this.xSlide}
                   className="halfDivider"
                   step={2}
@@ -85,7 +93,7 @@ class Section extends Component {
               </div>
             </div>
             <div style={{ width: -this.state.xPos + 565 }} className="half">
-              <Measure>{-this.state.xPos + 565} px</Measure>
+            {!this.state.sliderActive ? null : <Measure>{-this.state.xPos + 565} px</Measure>}
               {/* <Text /> */}
               <Content cIndex={1} cNum={2} index={this.props.index} />
             </div>
@@ -99,13 +107,15 @@ class Section extends Component {
               style={{ width: Number(this.state.xPos) + 360 }}
               className="third"
             >
-              <Measure>{Number(this.state.xPos) + 360} px</Measure>
+            {!this.state.sliderActive ? null : <Measure>{Number(this.state.xPos) + 360} px</Measure>}
               {/* <Text /> */}
               <Content cIndex={0} cNum={3} index={this.props.index} />
             </div>
             <div className="ground">
               <div className="thirdWidth">
                 <input
+                onMouseDown={this.activateMeasure}
+                onMouseUp={this.activateMeasure}
                   onChange={this.xSlide}
                   className="thirdDividerL"
                   step={2}
@@ -123,15 +133,16 @@ class Section extends Component {
               }}
               className="third"
             >
-              <Measure>
-                {360 + Number(this.state.yPos) - Number(this.state.xPos)} px
-              </Measure>
+            {!this.state.sliderActive ? null : <Measure>{360 + Number(this.state.yPos) - Number(this.state.xPos)} px</Measure>}
+              
               {/* <Text /> */}
               <Content cIndex={1} cNum={3} index={this.props.index} />
             </div>
             <div className="ground">
               <div className="thirdWidth">
                 <input
+                onMouseDown={this.activateMeasure}
+                onMouseUp={this.activateMeasure}
                   onChange={this.ySlide}
                   className="thirdDividerR"
                   step={2}
@@ -144,7 +155,7 @@ class Section extends Component {
               </div>
             </div>
             <div style={{ width: 360 - this.state.yPos }} className="third">
-              <Measure>{360 - this.state.yPos} px</Measure>
+            {!this.state.sliderActive ? null : <Measure>{360 - this.state.yPos} px</Measure>}
               {/*  */}
               {/* <Text /> */}
               <Content cIndex={2} cNum={3} index={this.props.index} />
@@ -155,7 +166,10 @@ class Section extends Component {
       default:
         SecDiv = null;
     }
-    return <div className="frame"><X index={this.props.index} />{SecDiv}</div>;
+    return <div className="frame">
+    <X index={this.props.index} />
+    {SecDiv}
+    </div>;
   }
 }
 

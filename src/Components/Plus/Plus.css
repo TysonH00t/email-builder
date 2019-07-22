@@ -8,7 +8,7 @@
   height: 50px;
   border-radius: 50%;
   border: none;
-  padding-bottom: 5px;
+  padding-bottom: 20px;
   padding-left: 5px;
   margin: 0 auto;
   transition-duration: 0.5s;
@@ -26,4 +26,9 @@
   padding-left: 0px;
   padding-right: 0px;
   padding-top: 0px;
+  background: red;
+}
+
+.rotate:hover {
+  background: rgba(255, 0, 0, .6);
 }

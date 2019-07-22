@@ -1,14 +1,13 @@
 .x{
     background: red;
     color: white;
-    font-size: 40px;
+    font-size: 35px;
     font-weight: bold;
     border: none;
-    border-radius: 50%;
-    padding: 5px 15px;
+    padding: 4px 15px;
     position: absolute;
-    left: -25px;
-    top: -25px;
+    right: 0px;
+    top: 0px;
     z-index: 2;
 }
 

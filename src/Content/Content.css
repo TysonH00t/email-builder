@@ -1,8 +1,9 @@
 .content {
   width: 99.3%;
   border: 2px dashed rgba(0, 110, 255, 1);
-  line-height: 375px;
   min-height: 400px;
+  font-size: 80px;
+  color: rgba(0, 110, 255, 1);
   cursor: pointer;
 }
 
