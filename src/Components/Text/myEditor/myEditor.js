@@ -4,7 +4,8 @@ import {
   EditorState,
   RichUtils,
   AtomicBlockUtils,
-  CompositeDecorator
+  CompositeDecorator,
+  Modifier
 } from "draft-js";
 import { mediaBlockRenderer } from "./entities/mediaBlockRenderer";
 import { convertToHTML } from "draft-convert";
@@ -24,7 +25,7 @@ class myEditor extends Component {
   ]);
 
   state = {
-    editorState: EditorState.createEmpty(this.decorator),
+    editorState: EditorState.createEmpty(),
     showURLInput: false,
     urlValue: ""
   };
@@ -163,6 +164,42 @@ class myEditor extends Component {
     }
   };
 
+  toggleColor(toggledColor) {
+    const {editorState} = this.state;
+    const selection = editorState.getSelection();
+
+    // Let's just allow one color at a time. Turn off all active colors.
+    const nextContentState = Object.keys(colorStyleMap)
+      .reduce((contentState, color) => {
+        return Modifier.removeInlineStyle(contentState, selection, color)
+      }, editorState.getCurrentContent());
+
+    let nextEditorState = EditorState.push(
+      editorState,
+      nextContentState,
+      'change-inline-style'
+    );
+
+    const currentStyle = editorState.getCurrentInlineStyle();
+
+    // Unset style override for current color.
+    if (selection.isCollapsed()) {
+      nextEditorState = currentStyle.reduce((state, color) => {
+        return RichUtils.toggleInlineStyle(state, color);
+      }, nextEditorState);
+    }
+
+    // If the color is being toggled on, apply it.
+    if (!currentStyle.has(toggledColor)) {
+      nextEditorState = RichUtils.toggleInlineStyle(
+        nextEditorState,
+        toggledColor
+      );
+    }
+
+    this.onChange(nextEditorState);
+  }
+
   render() {
     let urlInput;
     if (this.state.showURLInput) {
@@ -180,33 +217,33 @@ class myEditor extends Component {
       );
     }
 
-    const html = convertToHTML({
-      styleToHTML: style => {
-        if (style === "BOLD") {
-          return <span style={{ color: "blue" }} />;
-        }
-      },
-      blockToHTML: block => {
-        if (block.type === "PARAGRAPH") {
-          return { element: <p />, empty: <br /> };
-        }
-        if (block.type === "atomic") {
-          return {
-            start: "",
-            end: ""
-          };
-        }
-      },
-      entityToHTML: (entity, originalText) => {
-        if (entity.type === "LINK") {
-          return <a href={entity.data.url}>{originalText}</a>;
-        }
-        if (entity.type === "image") {
-          return <img alt="" src={entity.data.src} />;
-        }
-        return originalText;
-      }
-    })(this.state.editorState.getCurrentContent());
+    // const html = convertToHTML({
+    //   styleToHTML: style => {
+    //     if (style === "BOLD") {
+    //       return <span style={{ color: "blue" }} />;
+    //     }
+    //   },
+    //   blockToHTML: block => {
+    //     if (block.type === "PARAGRAPH") {
+    //       return { element: <p />, empty: <br /> };
+    //     }
+    //     if (block.type === "atomic") {
+    //       return {
+    //         start: "",
+    //         end: ""
+    //       };
+    //     }
+    //   },
+    //   entityToHTML: (entity, originalText) => {
+    //     if (entity.type === "LINK") {
+    //       return <a href={entity.data.url}>{originalText}</a>;
+    //     }
+    //     if (entity.type === "image") {
+    //       return <img alt="" src={entity.data.src} />;
+    //     }
+    //     return originalText;
+    //   }
+    // })(this.state.editorState.getCurrentContent());
 
     // If the user changes block type before entering any text, we can
     // either style the placeholder or hide it. Let's just hide it now.
@@ -240,6 +277,12 @@ class myEditor extends Component {
                 onToggle={this.toggleInlineStyle}
               />
             </div>
+            <div className="Controls">
+              <ColorControls
+                  editorState={this.state.editorState}
+                  onToggle={this.toggleColor.bind(this)}
+                />
+            </div>
             <button className="inline styleButton" onClick={this.onAddImage}>
               <FontAwesomeIcon icon="images" />
             </button>
@@ -254,9 +297,11 @@ class myEditor extends Component {
         </div>
         <div className={className} onClick={this.focus}>
           <Editor
+            customStyleMap={colorStyleMap}
+            editorState={this.state.editorState}
             blockStyleFn={getBlockStyle}
             blockRendererFn={mediaBlockRenderer}
-            customStyleMap={styleMap}
+            //customStyleMap={styleMap}
             editorState={this.state.editorState}
             handleKeyCommand={this.handleKeyCommand}
             onChange={this.onChange}
@@ -285,14 +330,14 @@ const Link = props => {
   return <a href={url}>{props.children}</a>;
 };
 
-const styleMap = {
-  CODE: {
-    backgroundColor: "rgba(0, 0, 0, 0.05)",
-    fontFamily: '"Inconsolata", "Menlo", "Consolas", monospace',
-    fontSize: 16,
-    padding: 2
-  }
-};
+// const styleMap = {
+//   CODE: {
+//     backgroundColor: "rgba(0, 0, 0, 0.05)",
+//     fontFamily: '"Inconsolata", "Menlo", "Consolas", monospace',
+//     fontSize: 16,
+//     padding: 2
+//   }
+// };
 
 function getBlockStyle(block) {
   switch (block.getType()) {
@@ -381,6 +426,60 @@ const InlineStyleControls = props => {
       ))}
     </div>
   );
+};
+class ColorStyleButton extends React.Component {
+  constructor() {
+    super();
+    this.onToggle = e => {
+      e.preventDefault();
+      this.props.onToggle(this.props.style);
+    };
+  }
+
+  render() {
+    let style = {...colorStyleMap[this.props.style]};
+    if (this.props.active) {
+      style = {...colorStyleMap[this.props.style], background: '#999'};
+    } 
+
+    return (
+      <span className="Color" style={style} onMouseDown={this.onToggle}>
+        {this.props.label}
+      </span>
+    );
+  }
+}
+
+var COLORS = [
+  {label: <FontAwesomeIcon icon="paint-brush" />, style: 'blue'},
+  {label: <FontAwesomeIcon icon="paint-brush" />, style: 'white'},
+];
+
+const ColorControls = (props) => {
+  var currentStyle = props.editorState.getCurrentInlineStyle();
+  return (
+    <div>
+      {COLORS.map(type =>
+        <ColorStyleButton
+          active={currentStyle.has(type.style)}
+          label={type.label}
+          onToggle={props.onToggle}
+          style={type.style}
+        />
+      )}
+    </div>
+  );
+};
+
+// This object provides the styling information for our custom color
+// styles.
+const colorStyleMap = {
+  blue: {
+    color: '#0078D7',
+  },
+  white: {
+    color: 'white',
+  },
 };
 
 /**

@@ -11,6 +11,7 @@ import { faListUl } from "@fortawesome/free-solid-svg-icons";
 import { faListOl } from "@fortawesome/free-solid-svg-icons";
 import { faImages } from "@fortawesome/free-solid-svg-icons";
 import { faLink } from "@fortawesome/free-solid-svg-icons";
+import { faPaintBrush } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faBold);
 library.add(faItalic);
@@ -20,6 +21,7 @@ library.add(faListUl);
 library.add(faListOl);
 library.add(faImages);
 library.add(faLink);
+library.add(faPaintBrush);
 
 function App() {
   return (

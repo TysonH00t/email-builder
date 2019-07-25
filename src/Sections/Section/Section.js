@@ -68,7 +68,7 @@ class Section extends Component {
         break;
       case "2":
         SecDiv = (
-          <div className="outer">
+          <div style={{paddingTop: this.state.sliderActive ? '21px' : '50px'}} className="outer">
             <div
               style={{ width: Number(this.state.xPos) + 565 }}
               className="half"
@@ -102,7 +102,7 @@ class Section extends Component {
         break;
       case "3":
         SecDiv = (
-          <div className="outer">
+          <div style={{paddingTop: this.state.sliderActive ? '21px' : '50px'}} className="outer">
             <div
               style={{ width: Number(this.state.xPos) + 360 }}
               className="third"

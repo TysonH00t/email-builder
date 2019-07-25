@@ -6,8 +6,8 @@ import NewContainer from "../Components/NewContainer/NewContainer";
 import Section from "../Sections/Section/Section";
 import Text from "../Components/Text/Text";
 import "./Builder.css";
-//import Editor from '../Components/Text/myEditor/myEditor';
-//import TextEditor from '../Components/Text/TextEditor/TextEditor';
+// import Editor from '../Components/Text/myEditor/myEditor';
+import TextEditor from '../Components/Text/TextEditor/TextEditor';
 
 //importing Redux
 import { connect } from 'react-redux';
@@ -57,7 +57,7 @@ class Builder extends Component {
           </div>
         </div>
         {/* <Editor /> */}
-        {/* <TextEditor /> */}
+        <TextEditor />
       </div>
     );
   }

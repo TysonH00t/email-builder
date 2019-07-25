@@ -7,7 +7,6 @@
   padding-left: 50px;
   padding-right: 50px;
   padding-bottom: 50px;
-  padding-top: 50px;
   border-bottom: 2px solid darkgrey;
   position: relative;
 }
@@ -18,7 +17,7 @@
 }
 
 .whole {
-  padding-top: 0px;
+  padding-top: 50px;
   width: 1180px;
   background: white;
   margin: 0 auto;

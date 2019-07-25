@@ -1,324 +1,130 @@
-import { Editor } from "slate-react";
+import React, { Component } from "react";
+import {
+  Editor,
+  EditorState,
+  // RichUtils,
+  // Modifier,
+  // AtomicBlockUtils,
+  CompositeDecorator
+} from "draft-js";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import "./TextEditor.css";
+class TextEditor extends React.Component {
+  constructor() {
+    super();
+    const compositeDecorator = new CompositeDecorator([
+      {
+        strategy: handleStrategy,
+        component: HandleSpan,
+      },
+      {
+        strategy: hashtagStrategy,
+        component: HashtagSpan,
+      },
+    ]);
 
-import React from "react";
-//import InitialValue from "./InitialValue";
-import { isKeyHotkey } from "is-hotkey";
+    this.state = {
+      editorState: EditorState.createEmpty(compositeDecorator),
+    };
 
-//import Redux and font awesome
-import * as actionTypes from '../../../store/actions';
-import { connect } from 'react-redux';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-/**
- * Define the default node type.
- *
- */
-
-const DEFAULT_NODE = "paragraph";
-
-/**
- * Define hotkey matchers.
- *
- */
-
-const isBoldHotkey = isKeyHotkey("mod+b");
-const isItalicHotkey = isKeyHotkey("mod+i");
-const isUnderlinedHotkey = isKeyHotkey("mod+u");
-
-/**
- * The rich text example.
- *
- */
-
-class Text extends React.Component {
-  /**
-   * Deserialize the initial editor value.
-   *
-   */
-
-  // state = {
-  //   value: Value.fromJSON(InitialValue)
-  // };
-
-  /**
-   * Check if the current selection has a mark with `type` in it.
-   *
-   */
-
-  hasMark = type => {
-    const { value } = this.props.content;
-    return value.activeMarks.some(mark => mark.type === type);
-  };
-
-  /**
-   * Check if the any of the currently selected blocks are of `type`.
-   *
-   */
-
-  hasBlock = type => {
-    const { value } = this.props.content;
-    return value.blocks.some(node => node.type === type);
-  };
-
-  /**
-   * Store a reference to the `editor`.
-   *
-   */
-
-  ref = editor => {
-    this.editor = editor;
-  };
-
-  /**
-   * Render.
-   *
-   */
+    this.focus = () => this.refs.editor.focus();
+    this.onChange = (editorState) => this.setState({editorState});
+    this.logState = () => console.log(this.state.editorState.toJS());
+  }
 
   render() {
     return (
-      <>
-        <div className="toolbar">
-          {this.renderMarkButton("bold", <FontAwesomeIcon icon="bold" />)}
-          {this.renderMarkButton("italic", <FontAwesomeIcon icon="italic" />)}
-          {this.renderMarkButton(
-            "underlined",
-            <FontAwesomeIcon icon="underline" />
-          )}
-          {this.renderBlockButton(
-            "numbered-list",
-            <FontAwesomeIcon icon="list-ol" />
-          )}
-          {this.renderBlockButton(
-            "bulleted-list",
-            <FontAwesomeIcon icon="list-ul" />
-          )}
+      <div style={styles.root}>
+        <div style={styles.editor} onClick={this.focus}>
+          <Editor
+            editorState={this.state.editorState}
+            onChange={this.onChange}
+            placeholder="Write a tweet..."
+            ref="editor"
+            spellCheck={true}
+            />
         </div>
-        <Editor
-          className="editor"
-          spellCheck
-          autoFocus
-          placeholder="Enter some rich text..."
-          ref={this.ref}
-          value={this.props.content.value}
-          onChange={this.onChange}
-          onKeyDown={this.onKeyDown}
-          renderNode={this.renderNode}
-          renderMark={this.renderMark}
-        />
-      </>
+        <input
+          onClick={this.logState}
+          style={styles.button}
+          type="button"
+          value="Log State"
+          />
+      </div>
     );
   }
-
-  /**
-   * Render a mark-toggling toolbar button.
-   *
-   */
-
-  renderMarkButton = (type, icon) => {
-    const isActive = this.hasMark(type);
-    let foreground = "grey";
-    if (isActive === true) {
-      foreground = "black";
-    } else {
-      foreground = "grey";
-    }
-    return (
-      <button
-      className="button"
-        style={{ color: foreground }}
-        active={isActive}
-        onMouseDown={event => this.onClickMark(event, type)}
-      >
-        {icon}
-      </button>
-    );
-  };
-
-  /**
-   * Render a block-toggling toolbar button.
-   *
-   */
-
-  renderBlockButton = (type, icon) => {
-    let isActive = this.hasBlock(type);
-
-    if (["numbered-list", "bulleted-list"].includes(type)) {
-      const {
-        value: { document, blocks }
-      } = this.props.content;
-
-      if (blocks.size > 0) {
-        const parent = document.getParent(blocks.first().key);
-        isActive = this.hasBlock("list-item") && parent && parent.type === type;
-      }
-    }
-    let foreground = "grey";
-    if (isActive === true) {
-      foreground = "black";
-    } else {
-      foreground = "grey";
-    }
-
-    return (
-      <button
-        className="button"
-        style={{ color: foreground }}
-        active={isActive}
-        onMouseDown={event => this.onClickBlock(event, type)}
-      >
-        {icon}
-      </button>
-    );
-  };
-
-  /**
-   * Render a Slate node.
-   *
-   */
-
-  renderNode = (props, editor, next) => {
-    const { attributes, children, node } = props;
-
-    switch (node.type) {
-      case "bulleted-list":
-        return <ul {...attributes}>{children}</ul>;
-      case "list-item":
-        return <li {...attributes}>{children}</li>;
-      case "numbered-list":
-        return <ol {...attributes}>{children}</ol>;
-      default:
-        return next();
-    }
-  };
-
-  /**
-   * Render a Slate mark.
-   *
-   */
-
-  renderMark = (props, editor, next) => {
-    const { children, mark, attributes } = props;
-
-    switch (mark.type) {
-      case "bold":
-        return <strong {...attributes}>{children}</strong>;
-      case "italic":
-        return <em {...attributes}>{children}</em>;
-      case "underlined":
-        return <u {...attributes}>{children}</u>;
-      default:
-        return next();
-    }
-  };
-
-  /**
-   * On change, save the new `value`.
-   *
-   */
-
-  onChange = ({ value }) => {
-    //this.setState({ value });
-    this.props.onContentUpdate({ value });
-  };
-
-  /**
-   * On key down, if it's a formatting command toggle a mark.
-   *
-   */
-
-  onKeyDown = (event, editor, next) => {
-    let mark;
-
-    if (isBoldHotkey(event)) {
-      mark = "bold";
-    } else if (isItalicHotkey(event)) {
-      mark = "italic";
-    } else if (isUnderlinedHotkey(event)) {
-      mark = "underlined";
-    } else {
-      return next();
-    }
-
-    event.preventDefault();
-    editor.toggleMark(mark);
-  };
-
-  /**
-   * When a mark button is clicked, toggle the current mark.
-   *
-   */
-
-  onClickMark = (event, type) => {
-    event.preventDefault();
-    this.editor.toggleMark(type);
-  };
-
-  /**
-   * When a block button is clicked, toggle the block type.
-   *
-   */
-
-  onClickBlock = (event, type) => {
-    event.preventDefault();
-
-    const { editor } = this;
-    const { value } = editor;
-    const { document } = value;
-
-    // Handle everything but list buttons.
-    if (type !== "bulleted-list" && type !== "numbered-list") {
-      const isActive = this.hasBlock(type);
-      const isList = this.hasBlock("list-item");
-
-      if (isList) {
-        editor
-          .setBlocks(isActive ? DEFAULT_NODE : type)
-          .unwrapBlock("bulleted-list")
-          .unwrapBlock("numbered-list");
-      } else {
-        editor.setBlocks(isActive ? DEFAULT_NODE : type);
-      }
-    } else {
-      // Handle the extra wrapping required for list buttons.
-      const isList = this.hasBlock("list-item");
-      const isType = value.blocks.some(block => {
-        return !!document.getClosest(block.key, parent => parent.type === type);
-      });
-
-      if (isList && isType) {
-        editor
-          .setBlocks(DEFAULT_NODE)
-          .unwrapBlock("bulleted-list")
-          .unwrapBlock("numbered-list");
-      } else if (isList) {
-        editor
-          .unwrapBlock(
-            type === "bulleted-list" ? "numbered-list" : "bulleted-list"
-          )
-          .wrapBlock(type);
-      } else {
-        editor.setBlocks("list-item").wrapBlock(type);
-      }
-    }
-  };
 }
 
 /**
- * Export.
- */
+       * Super simple decorators for handles and hashtags, for demonstration
+       * purposes only. Don't reuse these regexes.
+       */
+const HANDLE_REGEX = /\@[\w]+/g;
+const HASHTAG_REGEX = /\#[\w\u0590-\u05ff]+/g;
 
-const mapStateToProps = state => {
-  return {
-    content: state.currentText
+function handleStrategy(contentBlock, callback, contentState) {
+  findWithRegex(HANDLE_REGEX, contentBlock, callback);
+}
+
+function hashtagStrategy(contentBlock, callback, contentState) {
+  findWithRegex(HASHTAG_REGEX, contentBlock, callback);
+}
+
+function findWithRegex(regex, contentBlock, callback) {
+  const text = contentBlock.getText();
+  let matchArr, start;
+  while ((matchArr = regex.exec(text)) !== null) {
+    start = matchArr.index;
+    callback(start, start + matchArr[0].length);
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onContentUpdate: (content) => dispatch({type: actionTypes.UPDATE_CONTENT, content: content})
-  }
-}
+const HandleSpan = (props) => {
+  return (
+    <span
+      style={styles.handle}
+      data-offset-key={props.offsetKey}
+      >
+      {props.children}
+    </span>
+  );
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Text);
+const HashtagSpan = (props) => {
+  return (
+    <span
+      style={styles.hashtag}
+      data-offset-key={props.offsetKey}
+      >
+      {props.children}
+    </span>
+  );
+};
+
+const styles = {
+  root: {
+    fontFamily: '\'Helvetica\', sans-serif',
+    padding: 20,
+    width: 600,
+  },
+  editor: {
+    border: '1px solid #ddd',
+    cursor: 'text',
+    fontSize: 16,
+    minHeight: 40,
+    padding: 10,
+  },
+  button: {
+    marginTop: 10,
+    textAlign: 'center',
+  },
+  handle: {
+    color: 'rgba(98, 177, 254, 1.0)',
+    direction: 'ltr',
+    unicodeBidi: 'bidi-override',
+  },
+  hashtag: {
+    color: 'rgba(95, 184, 138, 1.0)',
+  },
+};
+export default TextEditor;

@@ -84,3 +84,17 @@ div.DraftEditor-root {
   .Button-Active {
     color: black;
   }
+
+  .Color {
+    background: #ddd;
+    border-radius: 30px;
+    font-size: 18px;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+  }
+
+  .Color:hover {
+    background: #999;
+    cursor: pointer;
+  }

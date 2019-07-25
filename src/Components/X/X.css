@@ -1,5 +1,5 @@
 .x{
-    background: red;
+    background: lightcoral;
     color: white;
     font-size: 35px;
     font-weight: bold;
@@ -13,5 +13,5 @@
 
 .x:hover {
     cursor: pointer;
-    background: lightcoral;
+    background: red;
 }
