@@ -30,5 +30,9 @@ const Media = props => {
 		media = <Image src={src} />;
 	}
 
+	// else if (type === "button") {
+	// 	media = <button />;
+	// }
+
 	return media;
 };

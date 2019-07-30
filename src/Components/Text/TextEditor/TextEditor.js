@@ -9,32 +9,30 @@ import {
 } from "draft-js";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-class TextEditor extends React.Component {
-  constructor() {
-    super();
-    const compositeDecorator = new CompositeDecorator([
-      {
-        strategy: handleStrategy,
-        component: HandleSpan,
-      },
-      {
-        strategy: hashtagStrategy,
-        component: HashtagSpan,
-      },
-    ]);
 
-    this.state = {
-      editorState: EditorState.createEmpty(compositeDecorator),
+class TextEditor extends React.Component {
+  compositeDecorator = new CompositeDecorator([
+    {
+      strategy: handleStrategy,
+      component: HandleSpan,
+    },
+    {
+      strategy: hashtagStrategy,
+      component: HashtagSpan,
+    },
+  ]);
+
+state = {
+      editorState: EditorState.createEmpty(this.compositeDecorator),
     };
 
-    this.focus = () => this.refs.editor.focus();
-    this.onChange = (editorState) => this.setState({editorState});
-    this.logState = () => console.log(this.state.editorState.toJS());
-  }
+    focus = () => this.refs.editor.focus();
+    onChange = (editorState) => this.setState({editorState});
 
   render() {
     return (
       <div style={styles.root}>
+      <button onClick={findWithRegex.bind(this)}>Click this for tweet</button>
         <div style={styles.editor} onClick={this.focus}>
           <Editor
             editorState={this.state.editorState}
@@ -44,12 +42,6 @@ class TextEditor extends React.Component {
             spellCheck={true}
             />
         </div>
-        <input
-          onClick={this.logState}
-          style={styles.button}
-          type="button"
-          value="Log State"
-          />
       </div>
     );
   }

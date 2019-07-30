@@ -7,6 +7,7 @@ import {
   CompositeDecorator,
   Modifier
 } from "draft-js";
+import 'draft-js/dist/Draft.css';
 import { mediaBlockRenderer } from "./entities/mediaBlockRenderer";
 import { convertToHTML } from "draft-convert";
 import "./myEditor.css";
@@ -25,9 +26,10 @@ class myEditor extends Component {
   ]);
 
   state = {
-    editorState: EditorState.createEmpty(),
+    editorState: EditorState.createEmpty(this.decorator),
     showURLInput: false,
-    urlValue: ""
+    urlValue: "",
+    alignment: "left"
   };
 
   focus = () => this.refs.editor.focus();
@@ -200,6 +202,14 @@ class myEditor extends Component {
     this.onChange(nextEditorState);
   }
 
+  toggleAlignment = x => {
+    if(this.state.alignment === x) {
+      this.setState({alignment: 'left'});
+    }else {
+      this.setState({alignment: x})
+    }
+  }
+
   render() {
     let urlInput;
     if (this.state.showURLInput) {
@@ -278,6 +288,12 @@ class myEditor extends Component {
               />
             </div>
             <div className="Controls">
+            <AlignmentControls
+            editorState={this.state.editorState}
+            onToggle={this.toggleColor.bind(this)}
+            />
+            </div>
+            <div className="Controls">
               <ColorControls
                   editorState={this.state.editorState}
                   onToggle={this.toggleColor.bind(this)}
@@ -286,6 +302,7 @@ class myEditor extends Component {
             <button className="inline styleButton" onClick={this.onAddImage}>
               <FontAwesomeIcon icon="images" />
             </button>
+            <button>Button</button>
             <button onMouseDown={this.promptForLink.bind(this)}>
               <strong>+</strong> <FontAwesomeIcon icon="link" />
             </button>
@@ -297,6 +314,7 @@ class myEditor extends Component {
         </div>
         <div className={className} onClick={this.focus}>
           <Editor
+            textAlignment={this.state.alignment}
             customStyleMap={colorStyleMap}
             editorState={this.state.editorState}
             blockStyleFn={getBlockStyle}
@@ -408,7 +426,7 @@ const BlockStyleControls = props => {
 var INLINE_STYLES = [
   { label: <FontAwesomeIcon icon="bold" />, style: "BOLD" },
   { label: <FontAwesomeIcon icon="italic" /> },
-  { label: <FontAwesomeIcon icon="underline" />, style: "UNDERLINE" }
+  { label: <FontAwesomeIcon icon="underline" />, style: "UNDERLINE" },
 ];
 
 const InlineStyleControls = props => {
@@ -416,6 +434,33 @@ const InlineStyleControls = props => {
   return (
     <div className="RichEditor-controls">
       {INLINE_STYLES.map((type, index) => (
+        <StyleButton
+          key={type.label + index}
+          active={currentStyle.has(type.style)}
+          label={type.label}
+          onToggle={props.onToggle}
+          style={type.style}
+        />
+      ))}
+    </div>
+  );
+};
+
+
+{/* <StyleButton label={<FontAwesomeIcon icon="align-center" />} onToggle={() => this.toggleAlignment('center')} />
+<StyleButton label={<FontAwesomeIcon icon="align-right" />} onToggle={() => this.toggleAlignment('right')} /> */}
+
+var ALIGNMENT_STYLES = [
+  { label: <FontAwesomeIcon icon="bold" />, style: "BOLD" },
+  { label: <FontAwesomeIcon icon="italic" /> },
+  { label: <FontAwesomeIcon icon="underline" />, style: "UNDERLINE" },
+];
+
+const AlignmentControls = props => {
+  var currentStyle = props.editorState.getCurrentInlineStyle();
+  return (
+    <div className="RichEditor-controls">
+      {ALIGNMENT_STYLES.map((type, index) => (
         <StyleButton
           key={type.label + index}
           active={currentStyle.has(type.style)}
