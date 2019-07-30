@@ -6,8 +6,9 @@ import NewContainer from "../Components/NewContainer/NewContainer";
 import Section from "../Sections/Section/Section";
 import Text from "../Components/Text/Text";
 import "./Builder.css";
-import Editor from '../Components/Text/myEditor/myEditor';
+// import Editor from '../Components/Text/myEditor/myEditor';
 // import TextEditor from '../Components/Text/TextEditor/TextEditor';
+import Colors from '../Components/Colors/Colors'
 
 //importing Redux
 import { connect } from 'react-redux';
@@ -56,7 +57,8 @@ class Builder extends Component {
             {sectionGrid}
           </div>
         </div>
-        <Editor />
+        {Colors}
+        {/* <Editor /> */}
         {/* <TextEditor /> */}
       </div>
     );

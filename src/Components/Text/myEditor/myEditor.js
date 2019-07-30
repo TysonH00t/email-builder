@@ -202,12 +202,18 @@ class myEditor extends Component {
     this.onChange(nextEditorState);
   }
 
-  toggleAlignment = x => {
-    if(this.state.alignment === x) {
+  toggleAlignment = alignment => {
+    // this.onChange(
+    //   RichUtils.toggleInlineStyle(this.state.editorState, alignment)
+    // );
+    if(this.state.alignment === alignment) {
       this.setState({alignment: 'left'});
     }else {
-      this.setState({alignment: x})
+      this.setState({alignment: alignment})
     }
+    
+    // this.setState({alignment: alignment})
+    //console.log(alignment)
   }
 
   render() {
@@ -290,7 +296,7 @@ class myEditor extends Component {
             <div className="Controls">
             <AlignmentControls
             editorState={this.state.editorState}
-            onToggle={this.toggleColor.bind(this)}
+            onToggle={this.toggleAlignment}
             />
             </div>
             <div className="Controls">
@@ -302,7 +308,7 @@ class myEditor extends Component {
             <button className="inline styleButton" onClick={this.onAddImage}>
               <FontAwesomeIcon icon="images" />
             </button>
-            <button>Button</button>
+            {/* <button>Button</button> */}
             <button onMouseDown={this.promptForLink.bind(this)}>
               <strong>+</strong> <FontAwesomeIcon icon="link" />
             </button>
@@ -451,9 +457,9 @@ const InlineStyleControls = props => {
 <StyleButton label={<FontAwesomeIcon icon="align-right" />} onToggle={() => this.toggleAlignment('right')} /> */}
 
 var ALIGNMENT_STYLES = [
-  { label: <FontAwesomeIcon icon="bold" />, style: "BOLD" },
-  { label: <FontAwesomeIcon icon="italic" /> },
-  { label: <FontAwesomeIcon icon="underline" />, style: "UNDERLINE" },
+  { label: <FontAwesomeIcon icon="align-left" />, style: "left" },
+  { label: <FontAwesomeIcon icon="align-center" />, style: "center" },
+  { label: <FontAwesomeIcon icon="align-right" />, style: 'right' },
 ];
 
 const AlignmentControls = props => {

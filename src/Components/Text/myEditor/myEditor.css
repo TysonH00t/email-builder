@@ -2,7 +2,7 @@ div.DraftEditor-root {
     border: 1px solid #000;
     background-color: white;
     min-height: 300px;
-    width: 800px;
+    width: 1000px;
     overflow-y: auto;
     margin: 0 auto;
   }
@@ -25,7 +25,7 @@ div.DraftEditor-root {
 
   .Toolbar {
     background: white;
-    width: 780px;
+    width: 980px;
     border: none;
     display: inline-block;
     margin: 0 auto;
