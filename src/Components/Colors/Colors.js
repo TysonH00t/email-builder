@@ -12,9 +12,9 @@ const Colors = [
 ]
 
 
-const ColorBlocks = () => (
+const ColorBlocks = (props) => (
     Colors.map(color => 
-            <Color color={color.style}></Color>
+            <Color index={props.index} color={color.style}></Color>
         )
     
 )

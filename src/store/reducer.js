@@ -35,7 +35,7 @@ const initialState = {
     gridShowing: false,
     contentShow: false,
     displayContent: false,
-    backgroundColor: 'white',
+    sectionDrag: false,
     currentSelection: {
         currentSection: null,
         currentContent: null,
@@ -58,8 +58,8 @@ const reducer = (state = initialState, action) => {
             gridShowing: !state.gridShowing,
         }
 
-        //PLACEHOLDER -- WHAT DOES IT DO
-        case actionTypes.SHOW_CONTENT: return {
+        //Displays text editor and updates current selection
+        case actionTypes.SHOW_EDITOR: return {
             ...state,
             contentShow: !state.contentShow,
             currentSelection: {
@@ -130,7 +130,7 @@ const reducer = (state = initialState, action) => {
                 }
                 return {
                     ...item,
-                     index: state.sections[action.index].index, division: state.sections[action.index].division, content: action.cArray, backgroundColor: 'white'
+                     index: state.sections[action.index].index, division: state.sections[action.index].division, content: action.cArray, backgroundColor: state.sections[action.index].backgroundColor
                     //{index: 0, division: 0, content: action.cArray}
                 }
             })]
@@ -138,7 +138,22 @@ const reducer = (state = initialState, action) => {
 
         case actionTypes.UPDATE_COLOR: return {
             ...state,
-            backgroundColor: action.color
+            sections: [...state.sections.map((item, index) => {
+                if (index !== action.index) {
+                    return item
+                }
+                return {
+                    ...item,
+                     index: state.sections[action.index].index, division: state.sections[action.index].division, content: state.sections[action.index].content, backgroundColor: action.color
+                    //{index: 0, division: 0, content: action.cArray}
+                }
+            })]
+        }
+
+        case actionTypes.MOVE_SECTION: return {
+            
+            ...state,
+            sectionDrag: action.sectionDrag
         }
 
        

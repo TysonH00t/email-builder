@@ -319,7 +319,7 @@ class myEditor extends Component {
           </div>
         </div>
         <div className={className} onClick={this.focus}>
-          <div style={{width: '1002px', margin: '0 auto', background: this.props.backgroundcolor}}>
+          <div style={{width: '1002px', margin: '0 auto', background: this.props.sections[this.props.secNum].backgroundColor}}>
             <Editor
               textAlignment={this.state.alignment}
               customStyleMap={colorStyleMap}
@@ -542,7 +542,8 @@ const colorStyleMap = {
  //Import Redux State
 const mapStateToProps = state => {
   return {
-    backgroundcolor: state.backgroundColor
+    sections: state.sections,
+    secNum: state.currentSelection.currentSection
   }
 }
   

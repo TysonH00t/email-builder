@@ -7,7 +7,7 @@ import * as actionTypes from '../../../store/actions';
 
 const Color = (props) => {
     return (
-        <button className="BackColor" style={{background: props.color}} onClick={() => props.onChangeColor(props.color)}></button>
+        <button className="BackColor" style={{background: props.color}} onClick={() => props.onChangeColor(props.index, props.color)}></button>
     )
 }
 
@@ -18,7 +18,7 @@ const Color = (props) => {
   //Import Redux Functions
   const mapDispatchToProps = dispatch => {
     return {
-      onChangeColor: (color) => dispatch({type: actionTypes.UPDATE_COLOR, color: color}),
+      onChangeColor: (index, color) => dispatch({type: actionTypes.UPDATE_COLOR, index: index, color: color,}),
     }
   }
   

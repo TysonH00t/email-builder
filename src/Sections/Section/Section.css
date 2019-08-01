@@ -23,6 +23,7 @@
   margin: 0 auto;
   min-height: 400px;
 }
+
 /* Half Section */
 .half {
   display: inline-block;
@@ -124,7 +125,7 @@ input[type="range"]::-moz-range-thumb {
   pointer-events: auto;
 }
 input[type="range"]::-moz-range-thumb:hover {
-  background: rgba(0, 110, 255, 0.8);
+  background: rgba(0, 120, 215, 0.8);
   cursor: pointer;
   width: 4px;
 }
@@ -132,4 +133,13 @@ input[type="range"]::-moz-range-thumb:hover {
 /*hide the outline behind the border*/
 input[type="range"]:-moz-focusring {
   outline-offset: -1px;
+}
+
+.drop {
+  padding: 20px 0;
+}
+
+.drop:hover {
+  background: rgba(0, 120, 215, .5);
+  cursor: pointer;
 }

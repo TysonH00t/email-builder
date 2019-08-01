@@ -15,6 +15,7 @@ import { faPaintBrush } from "@fortawesome/free-solid-svg-icons";
 import { faAlignRight } from "@fortawesome/free-solid-svg-icons";
 import { faAlignLeft } from "@fortawesome/free-solid-svg-icons";
 import { faAlignCenter } from "@fortawesome/free-solid-svg-icons";
+import { faArrowsAlt } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faBold);
 library.add(faItalic);
@@ -28,6 +29,7 @@ library.add(faPaintBrush);
 library.add(faAlignRight);
 library.add(faAlignLeft);
 library.add(faAlignCenter);
+library.add(faArrowsAlt);
 
 function App() {
   return (

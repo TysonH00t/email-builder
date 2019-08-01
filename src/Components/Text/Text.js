@@ -63,7 +63,7 @@ const mapDispatchToProps = dispatch => {
   return {
     onContentShow: (secIndex, conIndex, cNum) =>
       dispatch({
-        type: actionTypes.SHOW_CONTENT,
+        type: actionTypes.SHOW_EDITOR,
         index: secIndex,
         cIndex: conIndex,
         cNum: cNum

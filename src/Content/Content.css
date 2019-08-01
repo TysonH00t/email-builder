@@ -1,26 +1,26 @@
 .content {
   width: 99.3%;
-  border: 2px dashed rgba(0, 110, 255, 1);
+  border: 2px dashed rgb(190, 190, 190);
   min-height: 400px;
   font-size: 80px;
-  color: rgba(0, 110, 255, 1);
+  color: rgba(190, 190, 190, 1);
   cursor: pointer;
 }
 
 .content:hover {
-  background: rgba(0, 110, 255, 0.25);
-  border: 2px solid rgba(0, 110, 255, 1);
+  background: rgba(190, 190, 190, 0.25);
+  border: 2px solid rgba(190, 190, 190, 1);
 }
 
 h4 {
-  color: rgba(0, 110, 255, 1);
+  color: rgba(190, 190, 190, 1);
 }
 
 .tile {
   width: 60px;
   display: inline-block;
-  background: rgba(0, 110, 255, .1);
-  border: 2px solid rgba(0, 110, 255, 1);
+  background: rgba(190, 190, 190, .1);
+  border: 2px solid rgba(190, 190, 190, 1);
   height: 60px;
   margin: 5px;
   line-height: 60px;

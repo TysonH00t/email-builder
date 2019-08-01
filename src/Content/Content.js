@@ -90,7 +90,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onContentShow: (secIndex, conIndex, cNum) => dispatch({type: actionTypes.SHOW_CONTENT, index: secIndex, cIndex: conIndex, cNum: cNum}),
+    onContentShow: (secIndex, conIndex, cNum) => dispatch({type: actionTypes.SHOW_EDITOR, index: secIndex, cIndex: conIndex, cNum: cNum}),
   }
 }
 

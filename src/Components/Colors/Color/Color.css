@@ -6,18 +6,18 @@
     transition-duration: .25s;
     position: absolute;
     left: 0px;
-    top: 0px;
+    top: 50px;
     z-index: 2;
 }
 
-.BackColor:nth-of-type(2) {
-    top: 50px;
-}
 .BackColor:nth-of-type(3) {
     top: 100px;
 }
 .BackColor:nth-of-type(4) {
     top: 150px;
+}
+.BackColor:nth-of-type(5) {
+    top: 200px;
 }
 
 .BackColor:hover {
