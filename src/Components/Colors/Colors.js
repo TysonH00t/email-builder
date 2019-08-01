@@ -1,20 +1,23 @@
 import React from 'react';
 import Color from './Color/Color';
 
+
 const Colors = [
-    '#eeeeee',
-    '#505050',
-    '#000000',
-    '#0078D7'
+    {style: '#000000'},
+    {style: '#505050'},
+    {style: '#0078D7'},
+    {style: '#ffffff'},
+    
 
 ]
 
-const ColorBlocks = () => {
-    return (
-        Colors.map(color => 
-            <Color style={{background: color}}>&nbsp;</Color>
-        )
-    )
-}
 
-export default ColorBlocks
+const ColorBlocks = () => (
+    Colors.map(color => 
+            <Color color={color.style}></Color>
+        )
+    
+)
+
+
+export default ColorBlocks;

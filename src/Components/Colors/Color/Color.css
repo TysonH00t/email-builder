@@ -1,5 +1,28 @@
-.Color {
-    width: 48px;
-    height: 48px;
+.BackColor {
+    width: 54px;
+    height: 50px;
     border: 1px solid black;
+    border-radius: none;
+    transition-duration: .25s;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 2;
+}
+
+.BackColor:nth-of-type(2) {
+    top: 50px;
+}
+.BackColor:nth-of-type(3) {
+    top: 100px;
+}
+.BackColor:nth-of-type(4) {
+    top: 150px;
+}
+
+.BackColor:hover {
+    z-index: 3;
+    width: 62px;
+    height: 60px;
+    border: 2px solid black;
 }

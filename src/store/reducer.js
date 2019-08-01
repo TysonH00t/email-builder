@@ -35,6 +35,7 @@ const initialState = {
     gridShowing: false,
     contentShow: false,
     displayContent: false,
+    backgroundColor: 'white',
     currentSelection: {
         currentSection: null,
         currentContent: null,
@@ -77,6 +78,7 @@ const reducer = (state = initialState, action) => {
                             index: state.sections.length + 1 + action.sectionName,
                             division: action.sectionName,
                             content: action.contentNum,
+                            backgroundColor: 'white',
                           },
             ...state.sections.slice(state.sections.length)],
             
@@ -128,10 +130,15 @@ const reducer = (state = initialState, action) => {
                 }
                 return {
                     ...item,
-                     index: state.sections[action.index].index, division: state.sections[action.index].division, content: action.cArray
+                     index: state.sections[action.index].index, division: state.sections[action.index].division, content: action.cArray, backgroundColor: 'white'
                     //{index: 0, division: 0, content: action.cArray}
                 }
             })]
+        }
+
+        case actionTypes.UPDATE_COLOR: return {
+            ...state,
+            backgroundColor: action.color
         }
 
        

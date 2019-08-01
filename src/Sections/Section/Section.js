@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import "./Section.css";
 import Content from "../../Content/Content";
 import Measure from "../../Components/Measure/Measure";
+import Colors from '../../Components/Colors/Colors';
 import X from '../../Components/X/X';
+
+import { connect } from 'react-redux';
 
 class Section extends Component {
   state = {
@@ -58,8 +61,8 @@ class Section extends Component {
     switch (this.props.division) {
       case "1":
         SecDiv = (
-          <div className="outer">
-            <div className="whole">
+          <div className="outer"  style={{background: this.props.backgroundcolor}}>
+            <div className="whole"  style={{background: this.props.backgroundcolor}}>
               {/* <Text /> */}
               <Content cIndex={0} cNum={1} index={this.props.index} />
             </div>
@@ -68,9 +71,9 @@ class Section extends Component {
         break;
       case "2":
         SecDiv = (
-          <div style={{paddingTop: this.state.sliderActive ? '21px' : '50px'}} className="outer">
+          <div style={{paddingTop: this.state.sliderActive ? '21px' : '50px', background: this.props.backgroundcolor}} className="outer">
             <div
-              style={{ width: Number(this.state.xPos) + 565 }}
+              style={{ width: Number(this.state.xPos) + 565, background: this.props.backgroundcolor }}
               className="half"
             >
             {!this.state.sliderActive ? null : <Measure>{Number(this.state.xPos) + 565} px</Measure>}
@@ -92,7 +95,7 @@ class Section extends Component {
                 />
               </div>
             </div>
-            <div style={{ width: -this.state.xPos + 565 }} className="half">
+            <div style={{ width: -this.state.xPos + 565, background: this.props.backgroundcolor }} className="half">
             {!this.state.sliderActive ? null : <Measure>{-this.state.xPos + 565} px</Measure>}
               {/* <Text /> */}
               <Content cIndex={1} cNum={2} index={this.props.index} />
@@ -102,9 +105,9 @@ class Section extends Component {
         break;
       case "3":
         SecDiv = (
-          <div style={{paddingTop: this.state.sliderActive ? '21px' : '50px'}} className="outer">
+          <div style={{paddingTop: this.state.sliderActive ? '21px' : '50px', background: this.props.backgroundcolor}} className="outer">
             <div
-              style={{ width: Number(this.state.xPos) + 360 }}
+              style={{ width: Number(this.state.xPos) + 360, background: this.props.backgroundcolor }}
               className="third"
             >
             {!this.state.sliderActive ? null : <Measure>{Number(this.state.xPos) + 360} px</Measure>}
@@ -129,7 +132,7 @@ class Section extends Component {
             </div>
             <div
               style={{
-                width: 360 + Number(this.state.yPos) - Number(this.state.xPos)
+                width: 360 + Number(this.state.yPos) - Number(this.state.xPos), background: this.props.backgroundcolor
               }}
               className="third"
             >
@@ -154,7 +157,7 @@ class Section extends Component {
                 />
               </div>
             </div>
-            <div style={{ width: 360 - this.state.yPos }} className="third">
+            <div style={{ width: 360 - this.state.yPos, background: this.props.backgroundcolor }} className="third">
             {!this.state.sliderActive ? null : <Measure>{360 - this.state.yPos} px</Measure>}
               {/*  */}
               {/* <Text /> */}
@@ -167,10 +170,18 @@ class Section extends Component {
         SecDiv = null;
     }
     return <div className="frame">
+      <Colors />
     <X index={this.props.index} />
     {SecDiv}
     </div>;
   }
 }
 
-export default Section;
+
+const mapStateToProps = state => {
+  return {
+    backgroundcolor: state.backgroundColor,
+  }
+}
+
+export default connect(mapStateToProps, null)(Section);

@@ -1,6 +1,6 @@
 div.DraftEditor-root {
     border: 1px solid #000;
-    background-color: white;
+    background-color: inherit;
     min-height: 300px;
     width: 1000px;
     overflow-y: auto;

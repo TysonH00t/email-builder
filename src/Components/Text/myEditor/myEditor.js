@@ -319,20 +319,22 @@ class myEditor extends Component {
           </div>
         </div>
         <div className={className} onClick={this.focus}>
-          <Editor
-            textAlignment={this.state.alignment}
-            customStyleMap={colorStyleMap}
-            editorState={this.state.editorState}
-            blockStyleFn={getBlockStyle}
-            blockRendererFn={mediaBlockRenderer}
-            //customStyleMap={styleMap}
-            editorState={this.state.editorState}
-            handleKeyCommand={this.handleKeyCommand}
-            onChange={this.onChange}
-            onTab={this.onTab}
-            ref="editor"
-            spellCheck={true}
-          />
+          <div style={{width: '1002px', margin: '0 auto', background: this.props.backgroundcolor}}>
+            <Editor
+              textAlignment={this.state.alignment}
+              customStyleMap={colorStyleMap}
+              editorState={this.state.editorState}
+              blockStyleFn={getBlockStyle}
+              blockRendererFn={mediaBlockRenderer}
+              //customStyleMap={styleMap}
+              editorState={this.state.editorState}
+              handleKeyCommand={this.handleKeyCommand}
+              onChange={this.onChange}
+              onTab={this.onTab}
+              ref="editor"
+              spellCheck={true}
+            />
+          </div>
         </div>
       </div>
     );
@@ -536,6 +538,13 @@ const colorStyleMap = {
 /**
  * Export.
  */
+
+ //Import Redux State
+const mapStateToProps = state => {
+  return {
+    backgroundcolor: state.backgroundColor
+  }
+}
   
   const mapDispatchToProps = dispatch => {
     return {
@@ -543,4 +552,4 @@ const colorStyleMap = {
     }
   }
   
-  export default connect(null, mapDispatchToProps)(myEditor);
+  export default connect(mapStateToProps, mapDispatchToProps)(myEditor);
