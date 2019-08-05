@@ -6,9 +6,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { connect } from 'react-redux';
 import * as actionTypes from '../../store/actions';
 
+const onDragStart = (e) => {
+  // e.dataTransfer.setData("id");
+}
+
 
 const Move = (props) => (
-    <button draggable='true' className='move' onDragStart={props.onSectionDrag}><FontAwesomeIcon icon="arrows-alt" /></button>
+    <button draggable='true' className='move' onDragStart={(e) => onDragStart(e)}><FontAwesomeIcon icon="arrows-alt" /></button>
     
 )
 

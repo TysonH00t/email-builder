@@ -5,6 +5,7 @@ import Plus from "../Components/Plus/Plus";
 import NewContainer from "../Components/NewContainer/NewContainer";
 import Section from "../Sections/Section/Section";
 import Text from "../Components/Text/Text";
+import DNDTest from '../Components/DND/DNDTest/DNDTest';
 import "./Builder.css";
 // import Editor from '../Components/Text/myEditor/myEditor';
 // import TextEditor from '../Components/Text/TextEditor/TextEditor';
@@ -58,6 +59,7 @@ class Builder extends Component {
         </div>
         {/* <Editor /> */}
         {/* <TextEditor /> */}
+        <DNDTest />
       </div>
     );
   }

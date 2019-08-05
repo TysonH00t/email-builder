@@ -33,7 +33,9 @@ class Section extends Component {
     this.setState({ sliderActive: !this.state.sliderActive })
   }
 
- 
+  onDragOver = (e) => {
+    e.preventDefault();
+}
 
   render() {
     let color = this.props.sections[this.props.index].backgroundColor;
@@ -174,8 +176,8 @@ class Section extends Component {
         SecDiv = null;
     }
     return <div>
-      {/* <div className="drop" style={{display: !this.props.sectionDrag ? 'none' : 'block'}}></div> */}
-      <div className="drop"></div>
+      {/* <div className="drop" onDragOver={(e) => this.onDragOver(e)} style={{display: !this.props.sectionDrag ? 'none' : 'block'}}></div> */}
+      <div className="drop" onDragOver={(e) => this.onDragOver(e)}></div>
       <div className="frame">
       <Move />
         <Colors index={this.props.index} />
