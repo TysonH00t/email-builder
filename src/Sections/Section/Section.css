@@ -137,9 +137,11 @@ input[type="range"]:-moz-focusring {
 
 .drop {
   padding: 20px 0;
+  background: rgba(0, 120, 215, .3);
+  border: 3px solid rgba(0, 120, 215, .5);
 }
 
-.drop:hover {
-  background: rgba(0, 120, 215, .5);
-  cursor: pointer;
+.dropHover {
+  padding: 20px 0;
+  background: green;
 }

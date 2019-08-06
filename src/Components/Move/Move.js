@@ -6,20 +6,23 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { connect } from 'react-redux';
 import * as actionTypes from '../../store/actions';
 
-const onDragStart = (e) => {
-  // e.dataTransfer.setData("id");
+const onDragStart = (e, index, props) => {
+  props.onSectionDrag(true);
+  e.dataTransfer.setData("id", index);
 }
 
 
 const Move = (props) => (
-    <button draggable='true' className='move' onDragStart={(e) => onDragStart(e)}><FontAwesomeIcon icon="arrows-alt" /></button>
+    <div className="movePosition">
+      <button className='Move' draggable='true' onDragEnd={() => props.onSectionDrag(false)} onDragStart = {(e) => onDragStart(e, props.index, props)}><FontAwesomeIcon icon="arrows-alt" /></button>
+    </div>
     
 )
 
  //Import Redux Functions
  const mapDispatchToProps = dispatch => {
     return {
-      onSectionDrag: () => dispatch({type: actionTypes.MOVE_SECTION, sectionDrag: 'true'}),
+      onSectionDrag: (bool) => dispatch({type: actionTypes.SECTION_DRAG, bool: bool}),
     }
   }
 

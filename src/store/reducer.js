@@ -150,10 +150,33 @@ const reducer = (state = initialState, action) => {
             })]
         }
 
-        case actionTypes.MOVE_SECTION: return {
+        case actionTypes.SECTION_DRAG: return {
             
             ...state,
-            sectionDrag: action.sectionDrag
+            sectionDrag: action.bool
+        }
+
+        case actionTypes.MOVE_SECTION:
+        let id;
+        if(action.e != null){
+            id = action.e.dataTransfer.getData("id");
+
+        }
+        let moveArr = [...state.sections];
+        if (action.ind >= moveArr.length) {
+            var k = action.ind - moveArr.length + 1;
+            while (k--) {
+                moveArr.push(undefined);
+            }
+        }
+        moveArr.splice(action.ind, 0, moveArr.splice(id, 1)[0]);
+        return {
+            ...state,
+            sections: moveArr,
+            sectionDrag: false
+
+        
+        // sections: arr;
         }
 
        

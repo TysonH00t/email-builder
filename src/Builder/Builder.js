@@ -59,7 +59,7 @@ class Builder extends Component {
         </div>
         {/* <Editor /> */}
         {/* <TextEditor /> */}
-        <DNDTest />
+        {/* <DNDTest /> */}
       </div>
     );
   }

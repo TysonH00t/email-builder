@@ -228,7 +228,7 @@ class myEditor extends Component {
             value={this.state.urlValue}
             onKeyDown={this.onLinkInputKeyDown.bind(this)}
           />
-          <button onMouseDown={this.confirmLink.bind(this)}>Confirm</button>
+          <button className="Button"  onMouseDown={this.confirmLink.bind(this)}>Confirm</button>
         </div>
       );
     }
@@ -305,14 +305,14 @@ class myEditor extends Component {
                   onToggle={this.toggleColor.bind(this)}
                 />
             </div>
-            <button className="inline styleButton" onClick={this.onAddImage}>
+            <button className="Button"  className="inline styleButton" onClick={this.onAddImage}>
               <FontAwesomeIcon icon="images" />
             </button>
-            {/* <button>Button</button> */}
-            <button onMouseDown={this.promptForLink.bind(this)}>
+            {/* <button className="Button" >Button</button> */}
+            <button className="Button"  onMouseDown={this.promptForLink.bind(this)}>
               <strong>+</strong> <FontAwesomeIcon icon="link" />
             </button>
-            <button onMouseDown={this.removeLink.bind(this)}>
+            <button className="Button"  onMouseDown={this.removeLink.bind(this)}>
               - <FontAwesomeIcon icon="link" />
             </button>
             {urlInput}

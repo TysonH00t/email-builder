@@ -7,6 +7,7 @@ import Colors from '../../Components/Colors/Colors';
 import X from '../../Components/X/X';
 
 import { connect } from 'react-redux';
+import * as actionTypes from '../../store/actions';
 
 class Section extends Component {
   state = {
@@ -177,9 +178,9 @@ class Section extends Component {
     }
     return <div>
       {/* <div className="drop" onDragOver={(e) => this.onDragOver(e)} style={{display: !this.props.sectionDrag ? 'none' : 'block'}}></div> */}
-      <div className="drop" onDragOver={(e) => this.onDragOver(e)}></div>
+      <div className="drop" onDrop={(e)=>{this.props.onMoveSection(e, this.props.index)}} onDragOver={(e) => this.onDragOver(e)} style={{display: !this.props.sectionDrag ? 'none' : 'block'}}></div>
       <div className="frame">
-      <Move />
+      <Move index={this.props.index} />
         <Colors index={this.props.index} />
       <X index={this.props.index} />
       {SecDiv}
@@ -196,4 +197,11 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, null)(Section);
+const mapDispatchToProps = dispatch => {
+  return {
+    // onSectionDrag: () => dispatch({type: actionTypes.MOVE_SECTION, sectionDrag: 'true'}),
+    onMoveSection: (e, ind) => dispatch({type: actionTypes.MOVE_SECTION, e: e, ind: ind}),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Section);
