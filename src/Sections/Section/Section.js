@@ -5,6 +5,8 @@ import Measure from "../../Components/Measure/Measure";
 import Move from '../../Components/Move/Move';
 import Colors from '../../Components/Colors/Colors';
 import X from '../../Components/X/X';
+import Edit from '../../Components/Edit/Edit'
+import Check from '../../Components/Check/Check';
 
 import { connect } from 'react-redux';
 import * as actionTypes from '../../store/actions';
@@ -89,7 +91,7 @@ class Section extends Component {
               <Content cIndex={0} cNum={2} index={this.props.index} />
             </div>
             <div className="ground">
-              <div className="halfWidth">
+              <div style={{display: !this.props.sections[this.props.index].edit ? 'none': 'initial'}} className="halfWidth">
                 <input
                   onMouseDown={this.activateMeasure}
                   onMouseUp={this.activateMeasure}
@@ -122,7 +124,7 @@ class Section extends Component {
               <Content cIndex={0} cNum={3} index={this.props.index} />
             </div>
             <div className="ground">
-              <div className="thirdWidth">
+              <div style={{display: !this.props.sections[this.props.index].edit ? 'none': 'initial'}} className="thirdWidth">
                 <input
                 onMouseDown={this.activateMeasure}
                 onMouseUp={this.activateMeasure}
@@ -149,7 +151,7 @@ class Section extends Component {
               <Content cIndex={1} cNum={3} index={this.props.index} />
             </div>
             <div className="ground">
-              <div className="thirdWidth">
+              <div style={{display: !this.props.sections[this.props.index].edit ? 'none': 'initial'}} className="thirdWidth">
                 <input
                 onMouseDown={this.activateMeasure}
                 onMouseUp={this.activateMeasure}
@@ -180,9 +182,15 @@ class Section extends Component {
       {/* <div className="drop" onDragOver={(e) => this.onDragOver(e)} style={{display: !this.props.sectionDrag ? 'none' : 'block'}}></div> */}
       <div className="drop" onDrop={(e)=>{this.props.onMoveSection(e, this.props.index)}} onDragOver={(e) => this.onDragOver(e)} style={{display: !this.props.sectionDrag ? 'none' : 'block'}}></div>
       <div className="frame">
-      <Move index={this.props.index} />
+      <div style={{display: this.props.sections[this.props.index].edit ? 'none': 'initial'}}>
+        <Edit index={this.props.index} />
+      </div>
+      <div style={{display: !this.props.sections[this.props.index].edit ? 'none': 'initial'}}>
+        <Move index={this.props.index} />
         <Colors index={this.props.index} />
-      <X index={this.props.index} />
+        <X index={this.props.index} />
+        <Check index={this.props.index} />
+      </div>
       {SecDiv}
       </div>
     </div>

@@ -77,6 +77,7 @@ const reducer = (state = initialState, action) => {
                 {   
                             index: state.sections.length + 1 + action.sectionName,
                             division: action.sectionName,
+                            edit: true,
                             content: action.contentNum,
                             backgroundColor: 'white',
                           },
@@ -130,7 +131,7 @@ const reducer = (state = initialState, action) => {
                 }
                 return {
                     ...item,
-                     index: state.sections[action.index].index, division: state.sections[action.index].division, content: action.cArray, backgroundColor: state.sections[action.index].backgroundColor
+                     index: state.sections[action.index].index, division: state.sections[action.index].division, edit: state.sections[action.index].edit, content: action.cArray, backgroundColor: state.sections[action.index].backgroundColor
                     //{index: 0, division: 0, content: action.cArray}
                 }
             })]
@@ -144,7 +145,7 @@ const reducer = (state = initialState, action) => {
                 }
                 return {
                     ...item,
-                     index: state.sections[action.index].index, division: state.sections[action.index].division, content: state.sections[action.index].content, backgroundColor: action.color
+                     index: state.sections[action.index].index, division: state.sections[action.index].division, edit: state.sections[action.index].edit, content: state.sections[action.index].content, backgroundColor: action.color
                     //{index: 0, division: 0, content: action.cArray}
                 }
             })]
@@ -177,6 +178,21 @@ const reducer = (state = initialState, action) => {
 
         
         // sections: arr;
+        }
+
+        case actionTypes.EDITABLE: return {
+            
+            ...state,
+            sections: [...state.sections.map((item, index) => {
+                if (index !== action.index) {
+                    return item
+                }
+                return {
+                    ...item,
+                     index: state.sections[action.index].index, division: state.sections[action.index].division, edit: action.edit, content: state.sections[action.index].content, backgroundColor: state.sections[action.index].backgroundColor
+                    //{index: 0, division: 0, content: action.cArray}
+                }
+            })]
         }
 
        

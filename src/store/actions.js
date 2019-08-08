@@ -9,3 +9,4 @@ export const DISPLAY_CONTENT = "DISPLAY_CONTENT";
 export const UPDATE_COLOR = "UPDATE_COLOR";
 export const SECTION_DRAG = "SECTION_DRAG";
 export const MOVE_SECTION = "MOVE_SECTION";
+export const EDITABLE = "EDITABLE";

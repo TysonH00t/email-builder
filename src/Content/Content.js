@@ -20,7 +20,7 @@ class Content extends Component {
       this.props.onContentShow(this.props.index, this.props.cIndex, this.props.cNum);
       
   }
-    let content = <button onClick={showContent} className="content">+</button>
+    let content = this.props.sections[this.props.index].edit ? <button onClick={showContent} className="content">+</button> : <div></div>
 
     let tempContent = this.props.sections[this.props.index];
     if (tempContent.content[this.props.cIndex].content !== '') {
