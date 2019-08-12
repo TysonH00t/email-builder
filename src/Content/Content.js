@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import EditContent from '../Components/EditContent/EditContent';
 
 //Import Components
 import './Content.css';
@@ -12,6 +13,10 @@ import { convertToHTML } from "draft-convert";
 class Content extends Component {
 
   render() {
+
+    let editcontent = null;
+
+    
 
     //let bool = false;
     let showContent = (e) => {
@@ -32,33 +37,36 @@ class Content extends Component {
       // content = Html.serialize(this.props.currentText.value);
       // content = html.serialize(this.props.currentText.value);
       // content = String(html.serialize(this.props.currentText.value));
-      content = <div dangerouslySetInnerHTML={{__html: convertToHTML({
-        styleToHTML: style => {
-          if (style === "BOLD") {
-            return <span style={{ color: "blue" }} />;
+      content = <div className="ContentDisplayed">
+        {editcontent}
+        <div dangerouslySetInnerHTML={{__html: convertToHTML({
+          styleToHTML: style => {
+            if (style === "BOLD") {
+              return <span style={{ color: "blue" }} />;
+            }
+          },
+          blockToHTML: block => {
+            if (block.type === "PARAGRAPH") {
+              return { element: <p />, empty: <br /> };
+            }
+            if (block.type === "atomic") {
+              return {
+                start: "",
+                end: ""
+              };
+            }
+          },
+          entityToHTML: (entity, originalText) => {
+            if (entity.type === "LINK") {
+              return <a href={entity.data.url}>{originalText}</a>;
+            }
+            if (entity.type === "image") {
+              return <img alt="" src={entity.data.src} />;
+            }
+            return originalText;
           }
-        },
-        blockToHTML: block => {
-          if (block.type === "PARAGRAPH") {
-            return { element: <p />, empty: <br /> };
-          }
-          if (block.type === "atomic") {
-            return {
-              start: "",
-              end: ""
-            };
-          }
-        },
-        entityToHTML: (entity, originalText) => {
-          if (entity.type === "LINK") {
-            return <a href={entity.data.url}>{originalText}</a>;
-          }
-          if (entity.type === "image") {
-            return <img alt="" src={entity.data.src} />;
-          }
-          return originalText;
-        }
-      })(tempContent.content[this.props.cIndex].content.editorState.getCurrentContent())}} />
+        })(tempContent.content[this.props.cIndex].content.editorState.getCurrentContent())}} />
+      </div>
       
       
       
