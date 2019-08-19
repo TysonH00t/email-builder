@@ -1,0 +1,130 @@
+.X{
+    background: lightcoral;
+    color: white;
+    font-size: 35px;
+    font-weight: bold;
+    border: none;
+    padding: 4px 15px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    z-index: 2;
+}
+
+.X:hover {
+    cursor: pointer;
+    background: red;
+}
+
+.Check {
+    width: 54px;
+    height: 50px;
+    padding: 0;
+    font-size: 30px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 3;
+    border: 2px solid green;
+    color: green;
+}
+
+.Check:hover {
+    background: green;
+    color: white;
+}
+
+.Edit {
+    width: 54px;
+    height: 50px;
+    padding: 0;
+    font-size: 30px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    border: 2px solid grey;
+}
+
+.Edit:hover {
+    background: grey;
+    color: white;
+}
+
+.BackColor {
+    width: 54px;
+    height: 50px;
+    border: 1px solid black;
+    border-radius: none;
+    transition-duration: .25s;
+    position: absolute;
+    left: 0px;
+    top: 50px;
+    z-index: 2;
+}
+
+.BackColor:nth-of-type(2) {
+    top: 100px;
+}
+.BackColor:nth-of-type(3) {
+    top: 150px;
+}
+.BackColor:nth-of-type(4) {
+    top: 200px;
+}
+
+.BackColor:hover {
+    z-index: 3;
+    width: 62px;
+    height: 60px;
+    border: 2px solid black;
+}
+
+.plus {
+    background: rgba(0, 110, 255, 1);
+    color: white;
+    font-size: 50px;
+    font-weight: 800;
+    line-height: 0px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    padding-bottom: 20px;
+    padding-left: 5px;
+    margin: 0 auto;
+    transition-duration: 0.5s;
+  }
+  
+  .plus:hover {
+    cursor: pointer;
+    background: rgba(0, 110, 255, 0.6);
+  }
+  
+  .rotate {
+    transition-duration: 0.5s;
+    transform: rotate(45deg);
+    padding-bottom: 7.5px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+    background: red;
+  }
+  
+  .rotate:hover {
+    background: rgba(255, 0, 0, .6);
+  }
+  
+  .Move {
+    width: 54px;
+    height: 50px;
+    padding: 0;
+    font-size: 30px;
+}
+
+.movePosition {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 2;
+}

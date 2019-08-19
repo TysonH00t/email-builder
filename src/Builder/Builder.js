@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 
 //importing Components
-import Plus from "../Components/Plus/Plus";
 import NewContainer from "../Components/NewContainer/NewContainer";
 import Section from "../Sections/Section/Section";
 import Text from "../Components/Text/Text";
 import "./Builder.css";
+import Button from '../Components/Button/Button';
 // import Editor from '../Components/Text/myEditor/myEditor';
 // import TextEditor from '../Components/Text/TextEditor/TextEditor';
 
@@ -49,10 +49,11 @@ class Builder extends Component {
             <Section key={index + section.division} index={index} division={section.division} x={this.props.onSectionRemoved} />
           ))}
           <div className="container">
-            <Plus
+            {/* <Plus
               gridShowing={this.props.gridShow}
               showGrid={this.props.onGridShow}
-            />
+            /> */}
+            <Button buttonFunction={this.props.onGridShow} buttonType={this.props.gridShow ? "plus rotate" : "plus"}>+</Button>
             {sectionGrid}
           </div>
         </div>

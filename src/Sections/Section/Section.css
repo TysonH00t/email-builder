@@ -148,3 +148,10 @@ input[type="range"]:-moz-focusring {
   padding: 20px 0;
   background: green;
 }
+
+.movePosition {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 2;
+}

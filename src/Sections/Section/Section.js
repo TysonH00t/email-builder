@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import "./Section.css";
 import Content from "../../Content/Content";
 import Measure from "../../Components/Measure/Measure";
-import Move from '../../Components/Move/Move';
 import Colors from '../../Components/Colors/Colors';
-import X from '../../Components/X/X';
-import Edit from '../../Components/Edit/Edit'
-import Check from '../../Components/Check/Check';
+import Button from '../../Components/Button/Button';
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 
 import { connect } from 'react-redux';
 import * as actionTypes from '../../store/actions';
@@ -38,6 +38,11 @@ class Section extends Component {
 
   onDragOver = (e) => {
     e.preventDefault();
+}
+
+ onDragStart = (e, index, props) => {
+  props.onSectionDrag(true);
+  e.dataTransfer.setData("id", index);
 }
 
   render() {
@@ -183,13 +188,15 @@ class Section extends Component {
       <div className="drop" onDrop={(e)=>{this.props.onMoveSection(e, this.props.index)}} onDragOver={(e) => this.onDragOver(e)} style={{display: !this.props.sectionDrag ? 'none' : 'block'}}></div>
       <div className="frame">
       <div style={{display: this.props.sections[this.props.index].edit ? 'none': 'initial'}}>
-        <Edit index={this.props.index} />
+        <Button buttonFunction={() => this.props.onEdit(this.props.index, true)} buttonType="Edit"><FontAwesomeIcon icon="edit" /></Button>
       </div>
       <div style={{display: !this.props.sections[this.props.index].edit ? 'none': 'initial'}}>
-        <Move index={this.props.index} />
-        <Colors index={this.props.index} />
-        <X index={this.props.index} />
-        <Check index={this.props.index} />
+        <div className='movePosition'>
+<Button buttonType='Move' buttonDraggable='true' buttonDragEnd={() => this.props.onSectionDrag(false)} buttonDragStart={(e) => this.onDragStart(e, this.props.index, this.props)}><FontAwesomeIcon icon="arrows-alt" /></Button>
+        </div>
+        <Colors buttonFunction={(color) => this.props.onChangeColor(this.props.index, color)} index={this.props.index} />
+        <Button buttonFunction={() => this.props.onSectionRemoved(this.props.index)} buttonType='X'>X</Button>
+        <Button buttonFunction={() => this.props.onEdit(this.props.index, false)} buttonType='Check'><FontAwesomeIcon icon="check-square" /></Button>
       </div>
       {SecDiv}
       </div>
@@ -209,6 +216,10 @@ const mapDispatchToProps = dispatch => {
   return {
     // onSectionDrag: () => dispatch({type: actionTypes.MOVE_SECTION, sectionDrag: 'true'}),
     onMoveSection: (e, ind) => dispatch({type: actionTypes.MOVE_SECTION, e: e, ind: ind}),
+    onSectionRemoved: (secIndex) => dispatch({type: actionTypes.REMOVE_SECTION, index: secIndex}),
+    onEdit: (index, edit) => dispatch({type: actionTypes.EDITABLE,index: index, edit: edit}),
+    onChangeColor: (index, color) => dispatch({type: actionTypes.UPDATE_COLOR, index: index, color: color}),
+    onSectionDrag: (bool) => dispatch({type: actionTypes.SECTION_DRAG, bool: bool}),
   }
 }
 

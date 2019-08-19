@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import EditContent from '../Components/EditContent/EditContent';
 
 //Import Components
 import './Content.css';

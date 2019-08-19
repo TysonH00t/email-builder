@@ -1,5 +1,5 @@
 import React from 'react';
-import Color from './Color/Color';
+import Button from '../Button/Button';
 
 
 const Colors = [
@@ -7,14 +7,12 @@ const Colors = [
     {style: '#505050'},
     {style: '#0078D7'},
     {style: '#ffffff'},
-    
-
 ]
 
 
 const ColorBlocks = (props) => (
     Colors.map(color => 
-            <Color index={props.index} color={color.style}></Color>
+            <Button buttonType={'BackColor'} buttonFunction={(variable) => props.buttonFunction(variable)} variable={color.style} color={color.style}></Button>
         )
     
 )
