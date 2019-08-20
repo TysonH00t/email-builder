@@ -433,7 +433,7 @@ const BlockStyleControls = props => {
 
 var INLINE_STYLES = [
   { label: <FontAwesomeIcon icon="bold" />, style: "BOLD" },
-  { label: <FontAwesomeIcon icon="italic" /> },
+  { label: <FontAwesomeIcon icon="italic" />, style: 'ITALIC' },
   { label: <FontAwesomeIcon icon="underline" />, style: "UNDERLINE" },
 ];
 

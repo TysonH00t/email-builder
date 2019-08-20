@@ -53,7 +53,7 @@ class Builder extends Component {
               gridShowing={this.props.gridShow}
               showGrid={this.props.onGridShow}
             /> */}
-            <Button buttonFunction={this.props.onGridShow} buttonType={this.props.gridShow ? "plus rotate" : "plus"}>+</Button>
+            <Button buttonFunction={this.props.onGridShow} buttonType={this.props.gridShow ? "Plus Rotate" : "Plus"}>+</Button>
             {sectionGrid}
           </div>
         </div>

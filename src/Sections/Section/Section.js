@@ -191,7 +191,7 @@ class Section extends Component {
         <Button buttonFunction={() => this.props.onEdit(this.props.index, true)} buttonType="Edit"><FontAwesomeIcon icon="edit" /></Button>
       </div>
       <div style={{display: !this.props.sections[this.props.index].edit ? 'none': 'initial'}}>
-        <div className='movePosition'>
+        <div className='MovePosition'>
 <Button buttonType='Move' buttonDraggable='true' buttonDragEnd={() => this.props.onSectionDrag(false)} buttonDragStart={(e) => this.onDragStart(e, this.props.index, this.props)}><FontAwesomeIcon icon="arrows-alt" /></Button>
         </div>
         <Colors buttonFunction={(color) => this.props.onChangeColor(this.props.index, color)} index={this.props.index} />

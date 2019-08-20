@@ -8,12 +8,14 @@ import * as actionTypes from '../store/actions';
 import { connect } from 'react-redux';
 
 import { convertToHTML } from "draft-convert";
+import Button from '../Components/Button/Button';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class Content extends Component {
 
   render() {
 
-    let editcontent = null;
+    let editcontent = <Button buttonFunction={() => console.log('clicked')} buttonType="EditContent"><FontAwesomeIcon icon="edit" /></Button>;
 
     
 

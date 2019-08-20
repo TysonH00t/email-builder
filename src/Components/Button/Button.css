@@ -80,7 +80,7 @@
     border: 2px solid black;
 }
 
-.plus {
+.Plus {
     background: rgba(0, 110, 255, 1);
     color: white;
     font-size: 50px;
@@ -96,12 +96,12 @@
     transition-duration: 0.5s;
   }
   
-  .plus:hover {
+  .Plus:hover {
     cursor: pointer;
     background: rgba(0, 110, 255, 0.6);
   }
   
-  .rotate {
+  .Rotate {
     transition-duration: 0.5s;
     transform: rotate(45deg);
     padding-bottom: 7.5px;
@@ -111,7 +111,7 @@
     background: red;
   }
   
-  .rotate:hover {
+  .Rotate:hover {
     background: rgba(255, 0, 0, .6);
   }
   
@@ -122,9 +122,14 @@
     font-size: 30px;
 }
 
-.movePosition {
+.MovePosition {
     position: absolute;
     left: 0px;
     top: 0px;
     z-index: 2;
+}
+.EditContent {
+    position: absolute;
+    left: 54px;
+    top: 50px;
 }
