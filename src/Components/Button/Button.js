@@ -7,7 +7,7 @@ const Button = (props) =>  {
       <button
       onClick={() => props.buttonFunction(props.variable)}
       className={props.buttonType}
-      style={{background: props.color}}
+      style={{background: props.color, display: props.display}}
       draggable={props.buttonDraggable}
       onDragEnd={props.buttonDragEnd}
       onDragStart={props.buttonDragStart}
@@ -16,7 +16,5 @@ const Button = (props) =>  {
     </button>
     )
     }
-  
-
 
 export default Button;

@@ -15,8 +15,6 @@ class Content extends Component {
 
   render() {
 
-    let editcontent = <Button buttonFunction={() => console.log('clicked')} buttonType="EditContent"><FontAwesomeIcon icon="edit" /></Button>;
-
     
 
     //let bool = false;
@@ -39,7 +37,7 @@ class Content extends Component {
       // content = html.serialize(this.props.currentText.value);
       // content = String(html.serialize(this.props.currentText.value));
       content = <div className="ContentDisplayed">
-        {editcontent}
+        <Button buttonFunction={() => this.props.onContentShow(this.props.index, this.props.cIndex, this.props.cNum)} display={this.props.sections[this.props.index].edit ? 'initial': 'none'} buttonType="EditContent"><FontAwesomeIcon icon="edit" /></Button>
         <div dangerouslySetInnerHTML={{__html: convertToHTML({
           styleToHTML: style => {
             if (style === "BOLD") {

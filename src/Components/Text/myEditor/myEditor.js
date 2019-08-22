@@ -17,6 +17,7 @@ import { connect } from 'react-redux';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+
 class myEditor extends Component {
   decorator = new CompositeDecorator([
     {
@@ -26,7 +27,7 @@ class myEditor extends Component {
   ]);
 
   state = {
-    editorState: EditorState.createEmpty(this.decorator),
+    editorState: this.props.sections[this.props.currentSec.currentSection].content[this.props.currentSec.currentContent].content == '' ? EditorState.createEmpty(this.decorator) : this.props.sections[this.props.currentSec.currentSection].content[this.props.currentSec.currentContent].content.editorState,
     showURLInput: false,
     urlValue: "",
     alignment: "left"
@@ -217,6 +218,11 @@ class myEditor extends Component {
   }
 
   render() {
+    let contentExists = false;
+    if (this.props.sections[this.props.currentSec.currentSection].content[this.props.currentSec.currentContent].content != '') {
+      contentExists = true;
+    }
+
     let urlInput;
     if (this.state.showURLInput) {
       urlInput = (
@@ -319,7 +325,7 @@ class myEditor extends Component {
           </div>
         </div>
         <div className={className} onClick={this.focus}>
-          <div style={{width: '1002px', margin: '0 auto', background: this.props.sections[this.props.secNum].backgroundColor}}>
+          <div style={{width: '1002px', margin: '0 auto', background: this.props.sections[this.props.currentSec.currentSection].backgroundColor}}>
             <Editor
               textAlignment={this.state.alignment}
               customStyleMap={colorStyleMap}
@@ -543,7 +549,7 @@ const colorStyleMap = {
 const mapStateToProps = state => {
   return {
     sections: state.sections,
-    secNum: state.currentSelection.currentSection
+    currentSec: state.currentSelection,
   }
 }
   

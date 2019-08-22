@@ -183,6 +183,7 @@ class Section extends Component {
       default:
         SecDiv = null;
     }
+    
     return <div>
       {/* <div className="drop" onDragOver={(e) => this.onDragOver(e)} style={{display: !this.props.sectionDrag ? 'none' : 'block'}}></div> */}
       <div className="drop" onDrop={(e)=>{this.props.onMoveSection(e, this.props.index)}} onDragOver={(e) => this.onDragOver(e)} style={{display: !this.props.sectionDrag ? 'none' : 'block'}}></div>
