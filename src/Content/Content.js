@@ -36,26 +36,51 @@ class Content extends Component {
       // content = Html.serialize(this.props.currentText.value);
       // content = html.serialize(this.props.currentText.value);
       // content = String(html.serialize(this.props.currentText.value));
-      content = <div className="ContentDisplayed">
+      content = <div style={{textAlign: this.props.sections[this.props.index].content[this.props.cIndex] == '' ? 'left' : this.props.sections[this.props.index].content[this.props.cIndex].alignment}} className="ContentDisplayed">
         <Button buttonFunction={() => this.props.onContentShow(this.props.index, this.props.cIndex, this.props.cNum)} display={this.props.sections[this.props.index].edit ? 'initial': 'none'} buttonType="EditContent"><FontAwesomeIcon icon="edit" /></Button>
-        <div dangerouslySetInnerHTML={{__html: convertToHTML({
+        <div dangerouslySetInnerHTML=
+        {{__html: convertToHTML({
           styleToHTML: style => {
-            if (style === "BOLD") {
-              return <span style={{ color: "blue" }} />;
+            console.log('style' + style)
+            // if (style === "BOLD") {
+            //   return <strong />;
+            // }
+            // if (style === "ITALIC") {
+            //   return <em />;
+            // }
+            // if (style === "UNDERLINE") {
+            //   return <span style={{ textDecoration: 'underline' }} />;
+            // }
+            if (style === "blue") {
+              return <span style={{ color: '#0078D7' }} />;
+            }
+            if (style === "white") {
+              return <span style={{ color: 'white' }} />;
             }
           },
           blockToHTML: block => {
-            if (block.type === "PARAGRAPH") {
-              return { element: <p />, empty: <br /> };
-            }
-            if (block.type === "atomic") {
-              return {
-                start: "",
-                end: ""
-              };
-            }
+            console.log(block)
+            // if (block.type === "PARAGRAPH") {
+            //   return { element: <p />, empty: <br /> };
+            // }
+            // if (block.type === "H1") {
+            //   return { element: <h1 />, empty: <br /> };
+            // }
+            // if (block.type === "H2") {
+            //   return { element: <h2 />, empty: <br /> };
+            // }
+            // if (block.type === "H3") {
+            //   return { element: <h3 />, empty: <br /> };
+            // }
+            // if (block.type === "atomic") {
+            //   return {
+            //     start: "",
+            //     end: ""
+            //   };
+            // }
           },
           entityToHTML: (entity, originalText) => {
+            console.log(entity)
             if (entity.type === "LINK") {
               return <a href={entity.data.url}>{originalText}</a>;
             }

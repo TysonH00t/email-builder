@@ -9,7 +9,7 @@ import {
 } from "draft-js";
 import 'draft-js/dist/Draft.css';
 import { mediaBlockRenderer } from "./entities/mediaBlockRenderer";
-import { convertToHTML } from "draft-convert";
+// import { convertToHTML } from "draft-convert";
 import "./myEditor.css";
 
 import * as actionTypes from '../../../store/actions';
@@ -36,7 +36,7 @@ class myEditor extends Component {
   focus = () => this.refs.editor.focus();
   onChange = editorState => {
       this.setState({ editorState })
-      this.props.onContentUpdate({ editorState })
+      this.props.onContentUpdate({ editorState }, this.state.alignment)
 };
   onURLChange = e => this.setState({ urlValue: e.target.value });
 
@@ -332,7 +332,7 @@ class myEditor extends Component {
               editorState={this.state.editorState}
               blockStyleFn={getBlockStyle}
               blockRendererFn={mediaBlockRenderer}
-              //customStyleMap={styleMap}
+              // customStyleMap={styleMap}
               editorState={this.state.editorState}
               handleKeyCommand={this.handleKeyCommand}
               onChange={this.onChange}
@@ -362,14 +362,20 @@ const Link = props => {
   return <a href={url}>{props.children}</a>;
 };
 
-// const styleMap = {
-//   CODE: {
-//     backgroundColor: "rgba(0, 0, 0, 0.05)",
-//     fontFamily: '"Inconsolata", "Menlo", "Consolas", monospace',
-//     fontSize: 16,
-//     padding: 2
-//   }
-// };
+const styleMap = {
+  CODE: {
+    backgroundColor: "rgba(0, 0, 0, 0.05)",
+    fontFamily: '"Inconsolata", "Menlo", "Consolas", monospace',
+    fontSize: 16,
+    padding: 2
+  },
+  // blue: {
+  //   color: 'blue',
+  // },
+  // white: {
+  //   color: 'white',
+  // }
+};
 
 function getBlockStyle(block) {
   switch (block.getType()) {
@@ -407,7 +413,7 @@ const BLOCK_TYPES = [
   { label: "H1", style: "header-one" },
   { label: "H2", style: "header-two" },
   { label: "H3", style: "header-three" },
-  { label: "P1", style: "paragraph" },
+  { label: "P", style: "paragraph" },
   //{label: 'P2', style: 'paragraph2'},
   //{label: 'P3', style: 'paragraph3'},
   { label: <FontAwesomeIcon icon="list-ul" />, style: "unordered-list-item" },
@@ -441,6 +447,8 @@ var INLINE_STYLES = [
   { label: <FontAwesomeIcon icon="bold" />, style: "BOLD" },
   { label: <FontAwesomeIcon icon="italic" />, style: 'ITALIC' },
   { label: <FontAwesomeIcon icon="underline" />, style: "UNDERLINE" },
+  // {label: <FontAwesomeIcon icon="paint-brush" />, style: 'blue'},
+  // {label: <FontAwesomeIcon icon="paint-brush" />, style: 'white'},
 ];
 
 const InlineStyleControls = props => {
@@ -459,10 +467,6 @@ const InlineStyleControls = props => {
     </div>
   );
 };
-
-
-{/* <StyleButton label={<FontAwesomeIcon icon="align-center" />} onToggle={() => this.toggleAlignment('center')} />
-<StyleButton label={<FontAwesomeIcon icon="align-right" />} onToggle={() => this.toggleAlignment('right')} /> */}
 
 var ALIGNMENT_STYLES = [
   { label: <FontAwesomeIcon icon="align-left" />, style: "left" },
@@ -555,7 +559,7 @@ const mapStateToProps = state => {
   
   const mapDispatchToProps = dispatch => {
     return {
-      onContentUpdate: (content) => dispatch({type: actionTypes.UPDATE_CONTENT, content: content})
+      onContentUpdate: (content, alignment) => dispatch({type: actionTypes.UPDATE_CONTENT, content: content, alignment: alignment})
     }
   }
   

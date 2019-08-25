@@ -1,6 +1,9 @@
 .body {
     width: 100%;
     height: 100%;
+    font-family: 'segoe ui';
+    font-size: 16px;
+    color: #505050;
 }
 
 .builder {
@@ -15,5 +18,20 @@
   margin: 0 auto;
 }
 
+h1 {
+font-size: 37px;
+}
+
+h2 {
+font-size: 28px;
+}
+
+h3 {
+font-size: 20px;
+}
+
+p {
+font-size: 16px;
+}
 
 

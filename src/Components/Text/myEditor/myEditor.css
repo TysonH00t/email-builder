@@ -87,9 +87,9 @@ div.DraftEditor-root {
 
   .Color {
     background: #ddd;
-    border-radius: 30px;
+    border-radius: 50%;
     font-size: 18px;
-    padding: 10px;
+    padding: 13px 15px;
     margin: 5px;
     cursor: pointer;
   }

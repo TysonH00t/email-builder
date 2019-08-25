@@ -46,7 +46,8 @@ const initialState = {
     editorState: EditorState.createEmpty(decorator),
     showURLInput: false,
     urlValue: ""
-      }
+      },
+      currentAlignment: 'left'
 
 };
 
@@ -118,7 +119,8 @@ const reducer = (state = initialState, action) => {
         case actionTypes.UPDATE_CONTENT: return {
             
             ...state,
-            currentText: action.content
+            currentText: action.content,
+            currentAlignment: action.alignment
         }
 
         //PLACEHOLDER -- WHAT DOES IT DO
@@ -131,7 +133,7 @@ const reducer = (state = initialState, action) => {
                 }
                 return {
                     ...item,
-                     index: state.sections[action.index].index, division: state.sections[action.index].division, edit: state.sections[action.index].edit, content: action.cArray, backgroundColor: state.sections[action.index].backgroundColor
+                     index: state.sections[action.index].index, division: state.sections[action.index].division, edit: state.sections[action.index].edit, content: action.cArray, backgroundColor: state.sections[action.index].backgroundColor, currentAlignment: action.currentAlignment,
                     //{index: 0, division: 0, content: action.cArray}
                 }
             })]
@@ -194,7 +196,7 @@ const reducer = (state = initialState, action) => {
                 }
             })]
         }
-        
+
         
         default: 
         return state;

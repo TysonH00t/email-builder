@@ -26,11 +26,11 @@ class Text extends Component {
       let contArray = [];
       for (let i = 0; i < this.props.currentContNum; i++) {
         if (i === this.props.currentCont) {
-          contArray.push({ display: true, content: this.props.currentText });
+          contArray.push({ display: true, content: this.props.currentText, alignment: this.props.currentAlignment });
           //contArray.push({ display: false, content: "" });
         } else {
           
-            contArray.push({ display: true, content: this.props.sections[this.props.currentSec].content[i].content });
+            contArray.push({ display: true, content: this.props.sections[this.props.currentSec].content[i].content, alignment: this.props.sections[this.props.currentSec].content[i].content });
           
         }
       }
@@ -54,7 +54,8 @@ const mapStateToProps = state => {
     currentText: state.currentText,
     currentSec: state.currentSelection.currentSection,
     currentCont: state.currentSelection.currentContent,
-    currentContNum: state.currentSelection.contentNumber
+    currentContNum: state.currentSelection.contentNumber,
+    currentAlignment: state.currentAlignment,
   };
 };
 
@@ -66,13 +67,13 @@ const mapDispatchToProps = dispatch => {
         type: actionTypes.SHOW_EDITOR,
         index: secIndex,
         cIndex: conIndex,
-        cNum: cNum
+        cNum: cNum,
       }),
     activateContent: (secIndex, cArray) =>
       dispatch({
         type: actionTypes.ACTIVATE_CONTENT,
         index: secIndex,
-        cArray: cArray
+        cArray: cArray,
       })
   };
 };
