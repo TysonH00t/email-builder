@@ -4,9 +4,9 @@
 
 .outer {
   background: white;
-  padding-left: 50px;
-  padding-right: 50px;
-  padding-bottom: 50px;
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-bottom: 25px;
   border-bottom: 2px solid darkgrey;
   position: relative;
 }
@@ -17,11 +17,11 @@
 }
 
 .whole {
-  padding-top: 50px;
-  width: 1180px;
+  padding-top: 25px;
+  width: 590px;
   background: inherit;
   margin: 0 auto;
-  min-height: 400px;
+  min-height: 200px;
   vertical-align: top;
 }
 
@@ -29,7 +29,7 @@
 .half {
   display: inline-block;
   background: inherit;
-  min-height: 400px;
+  min-height: 200px;
   vertical-align: top;
 }
 
@@ -140,8 +140,8 @@ input[type="range"]:-moz-focusring {
 
 .drop {
   padding: 20px 0;
-  background: rgba(0, 120, 215, .3);
-  border: 3px solid rgba(0, 120, 215, .5);
+  background: rgba(0, 120, 215, 0.3);
+  border: 3px solid rgba(0, 120, 215, 0.5);
 }
 
 .dropHover {
