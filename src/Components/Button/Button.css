@@ -6,7 +6,7 @@
     border: none;
     padding: 2px 7px;
     position: absolute;
-    right: 0px;
+    right: -25px;
     top: 0px;
     z-index: 2;
 }
@@ -23,7 +23,7 @@
     font-size: 15px;
     position: absolute;
     bottom: 0;
-    right: 0;
+    right: -25px;
     z-index: 3;
     border: 2px solid green;
     color: green;
@@ -41,7 +41,7 @@
     font-size: 15px;
     position: absolute;
     top: 0;
-    left: 0;
+    left: -25px;
     z-index: 3;
     border: 2px solid grey;
 }
@@ -59,7 +59,7 @@
     border-radius: none;
     transition-duration: .25s;
     position: absolute;
-    left: 0px;
+    left: -25px;
     top: 25px;
     z-index: 2;
 }
@@ -125,12 +125,25 @@
 
 .MovePosition {
     position: absolute;
-    left: 0px;
+    left: -25px;
     top: 0px;
     z-index: 2;
 }
 .EditContent {
     position: absolute;
     left: 0px;
-    top: -66px;
+    top: -25px;
+    width: 25px;
+    height: 25px;
+    padding: 0;
+    font-size: 15px;
+}
+
+.Margin {
+    position: absolute;
+    bottom: 0;
+    left: -25px;
+    padding: 0;
+    width: 25px;
+    height: 25px;
 }

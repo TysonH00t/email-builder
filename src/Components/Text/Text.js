@@ -26,11 +26,11 @@ class Text extends Component {
       let contArray = [];
       for (let i = 0; i < this.props.currentContNum; i++) {
         if (i === this.props.currentCont) {
-          contArray.push({ display: true, content: this.props.currentText, alignment: this.props.currentAlignment });
+          contArray.push({ display: true, content: this.props.currentText, alignment: this.props.currentAlignment, margin: this.props.sections[this.props.currentSec].content[i].margin });
           //contArray.push({ display: false, content: "" });
         } else {
           
-            contArray.push({ display: true, content: this.props.sections[this.props.currentSec].content[i].content, alignment: this.props.sections[this.props.currentSec].content[i].content });
+            contArray.push({ display: true, content: this.props.sections[this.props.currentSec].content[i].content, alignment: this.props.sections[this.props.currentSec].content[i].alignment, margin: this.props.sections[this.props.currentSec].content[i].margin });
           
         }
       }

@@ -76,7 +76,7 @@ class Section extends Component {
       case "1":
         SecDiv = (
           <div className="outer"  style={{background: color}}>
-            <div className="whole"  style={{background: color}}>
+            <div className="whole"  style={{background: color, paddingTop: this.props.sections[this.props.index].content[0].margin ? '0' : '25px'}}>
               {/* <Text /> */}
               <Content cIndex={0} cNum={1} index={this.props.index} />
             </div>
@@ -85,12 +85,12 @@ class Section extends Component {
         break;
       case "2":
         SecDiv = (
-          <div style={{paddingTop: this.state.sliderActive ? '21px' : '50px', background: color}} className="outer">
+          <div style={{paddingTop: this.state.sliderActive ? '0px' : '0px', background: color}} className="outer">
             <div
-              style={{ width: Number(this.state.xPos) + 565, background: 'color' }}
+              style={{ width: Number(this.state.xPos) + 270, background: 'color' }}
               className="half"
             >
-            {!this.state.sliderActive ? null : <Measure>{Number(this.state.xPos) + 565} px</Measure>}
+            {!this.state.sliderActive ? null : <Measure>{Number(this.state.xPos) + 270} px</Measure>}
               {/* <Measure>{Number(this.state.xPos) + 565} px</Measure> */}
               {/* <Text /> */}
               <Content cIndex={0} cNum={2} index={this.props.index} />
@@ -103,14 +103,14 @@ class Section extends Component {
                   onChange={this.xSlide}
                   className="halfDivider"
                   step={2}
-                  min={-390}
-                  max={390}
+                  min={-170}
+                  max={170}
                   type="range"
                 />
               </div>
             </div>
-            <div style={{ width: -this.state.xPos + 565, background: color }} className="half">
-            {!this.state.sliderActive ? null : <Measure>{-this.state.xPos + 565} px</Measure>}
+            <div style={{ width: -this.state.xPos + 270, background: color }} className="half">
+            {!this.state.sliderActive ? null : <Measure>{-this.state.xPos + 270} px</Measure>}
               {/* <Text /> */}
               <Content cIndex={1} cNum={2} index={this.props.index} />
             </div>
@@ -193,7 +193,7 @@ class Section extends Component {
       </div>
       <div style={{display: !this.props.sections[this.props.index].edit ? 'none': 'initial'}}>
         <div className='MovePosition'>
-<Button buttonType='Move' buttonDraggable='true' buttonDragEnd={() => this.props.onSectionDrag(false)} buttonDragStart={(e) => this.onDragStart(e, this.props.index, this.props)}><FontAwesomeIcon icon="arrows-alt" /></Button>
+        <Button buttonType='Move' buttonDraggable='true' buttonDragEnd={() => this.props.onSectionDrag(false)} buttonDragStart={(e) => this.onDragStart(e, this.props.index, this.props)}><FontAwesomeIcon icon="arrows-alt" /></Button>
         </div>
         <Colors buttonFunction={(color) => this.props.onChangeColor(this.props.index, color)} index={this.props.index} />
         <Button buttonFunction={() => this.props.onSectionRemoved(this.props.index)} buttonType='X'>X</Button>

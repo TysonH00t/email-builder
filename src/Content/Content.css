@@ -1,7 +1,7 @@
 .content {
-  width: 99.3%;
+  width: 100%;
   border: 2px dashed rgb(190, 190, 190);
-  min-height: 400px;
+  min-height: 200px;
   font-size: 80px;
   color: rgba(190, 190, 190, 1);
   cursor: pointer;
@@ -41,4 +41,8 @@ h4 {
 
 .ContentDisplayed {
   position: relative;
+}
+
+figure {
+  margin: 0;
 }

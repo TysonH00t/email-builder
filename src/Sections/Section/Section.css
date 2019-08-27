@@ -4,9 +4,9 @@
 
 .outer {
   background: white;
-  padding-left: 25px;
-  padding-right: 25px;
-  padding-bottom: 25px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
   border-bottom: 2px solid darkgrey;
   position: relative;
 }
@@ -17,8 +17,8 @@
 }
 
 .whole {
-  padding-top: 25px;
-  width: 590px;
+  padding-top: 0px;
+  width: 640px;
   background: inherit;
   margin: 0 auto;
   min-height: 200px;
@@ -34,17 +34,17 @@
 }
 
 .half:nth-child(1) {
-  margin-right: 23px;
+  margin-right: 25px;
 }
 
 .half:nth-child(3) {
-  margin-left: 23px;
+  margin-left: 25px;
 }
 
 .halfDivider {
   position: absolute;
-  top: 240px;
-  left: 249px;
+  top: 90px;
+  left: 145px;
   z-index: 1;
   background: transparent;
 }
@@ -97,7 +97,7 @@ input[type="range"] {
 }
 
 .halfWidth input[type="range"] {
-  width: 780px;
+  width: 345px;
 }
 
 /* .thirdWidth input[type="range"] {
@@ -105,14 +105,14 @@ input[type="range"] {
 } */
 
 input[type="range"]::-moz-range-track {
-  min-height: 400px;
+  min-height: 200px;
   background: transparent;
   border: none;
   border-radius: 3px;
 }
 
 .halfWidth input[type="range"]::-moz-range-track {
-  width: 780px;
+  width: 345px;
 }
 
 /* .thirdWidth input[type="range"]::-moz-range-track {
@@ -121,7 +121,7 @@ input[type="range"]::-moz-range-track {
 
 input[type="range"]::-moz-range-thumb {
   border: none;
-  min-height: 400px;
+  min-height: 200px;
   width: 4px;
   border-radius: 0%;
   background: lightgrey;

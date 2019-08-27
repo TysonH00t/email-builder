@@ -1,14 +1,14 @@
 div.DraftEditor-root {
     border: 1px solid #000;
     background-color: inherit;
-    min-height: 300px;
-    width: 1000px;
+    min-height: 200px;
+    width: 640px;
     overflow-y: auto;
     margin: 0 auto;
   }
   div.DraftEditor-editorContainer,
   div.public-DraftEditor-content {
-    min-height: 300px;
+    min-height: 200px;
     height: 100%;
     padding: 5px;
   }
@@ -25,11 +25,11 @@ div.DraftEditor-root {
 
   .Toolbar {
     background: white;
-    width: 980px;
     border: none;
+    width: 630px;
     display: inline-block;
     margin: 0 auto;
-    padding: 25px 10px;
+    padding: 15px 5px;
     text-align: left;
   }
 
@@ -71,8 +71,8 @@ div.DraftEditor-root {
   }
   
   .Button {
-    padding: 15px;
-    font-size: 18px;
+    padding: 10px;
+    font-size: 12px;
     color: grey;
   }
   

@@ -18,6 +18,7 @@ import { faAlignCenter } from "@fortawesome/free-solid-svg-icons";
 import { faArrowsAlt } from "@fortawesome/free-solid-svg-icons";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { faCheckSquare } from "@fortawesome/free-solid-svg-icons";
+import { faColumns } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faBold);
 library.add(faItalic);
@@ -34,6 +35,7 @@ library.add(faAlignCenter);
 library.add(faArrowsAlt);
 library.add(faEdit);
 library.add(faCheckSquare);
+library.add(faColumns);
 
 function App() {
   return (

@@ -325,7 +325,7 @@ class myEditor extends Component {
           </div>
         </div>
         <div className={className} onClick={this.focus}>
-          <div style={{width: '1002px', margin: '0 auto', background: this.props.sections[this.props.currentSec.currentSection].backgroundColor}}>
+          <div style={{width: '640px', margin: '0 auto', background: this.props.sections[this.props.currentSec.currentSection].backgroundColor}}>
             <Editor
               textAlignment={this.state.alignment}
               customStyleMap={colorStyleMap}
