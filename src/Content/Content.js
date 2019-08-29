@@ -38,7 +38,8 @@ class Content extends Component {
       }
 
     let content = this.props.sections[this.props.index].edit ? <div>
-      <button style={{width: this.props.sections[this.props.index].content[this.props.cIndex].margin ? '640px' : '590px', margin: this.props.sections[this.props.index].content[this.props.cIndex].margin ? '0' : '0px 25px 25px 25px'}} onClick={showContent} className="content">+</button>
+      <button onClick={showContent} className="content">+</button>
+      {/* <button style={{width: this.props.sections[this.props.index].content[this.props.cIndex].margin ? '640px' : '590px', margin: this.props.sections[this.props.index].content[this.props.cIndex].margin ? '0' : '0px 25px 25px 25px'}} onClick={showContent} className="content">+</button> */}
       <Button style={{display: this.props.sections[this.props.index].edit ? 'initial' : 'none'}} buttonFunction={() => this.props.activateContent(this.props.index, contArray)} buttonType='Margin'><FontAwesomeIcon icon="columns" /></Button>
     </div> : <div></div>
 
@@ -53,7 +54,8 @@ class Content extends Component {
       // content = html.serialize(this.props.currentText.value);
       // content = String(html.serialize(this.props.currentText.value));
       content = <div>
-        <div style={{textAlign: this.props.sections[this.props.index].content[this.props.cIndex] == '' ? 'left' : this.props.sections[this.props.index].content[this.props.cIndex].alignment, width: this.props.sections[this.props.index].content[this.props.cIndex].margin ? '640px' : '590px', margin: this.props.sections[this.props.index].content[this.props.cIndex].margin ? '0' : '0px 25px 25px 25px'}} className="ContentDisplayed">
+        <div style={{textAlign: this.props.sections[this.props.index].content[this.props.cIndex] == '' ? 'left' : this.props.sections[this.props.index].content[this.props.cIndex].alignment}} className="ContentDisplayed">
+        {/* <div style={{textAlign: this.props.sections[this.props.index].content[this.props.cIndex] == '' ? 'left' : this.props.sections[this.props.index].content[this.props.cIndex].alignment, width: this.props.sections[this.props.index].content[this.props.cIndex].margin ? '640px' : '590px', margin: this.props.sections[this.props.index].content[this.props.cIndex].margin ? '0' : '0px 25px 25px 25px'}} className="ContentDisplayed"> */}
           <Button buttonFunction={() => this.props.onContentShow(this.props.index, this.props.cIndex, this.props.cNum)} display={this.props.sections[this.props.index].edit ? 'initial': 'none'} buttonType="EditContent"><FontAwesomeIcon icon="edit" /></Button>
           <div dangerouslySetInnerHTML=
           {{__html: convertToHTML({
@@ -114,7 +116,7 @@ class Content extends Component {
             }
           })(tempContent.content[this.props.cIndex].content.editorState.getCurrentContent())}} />
         </div>
-        <Button style={{display: this.props.sections[this.props.index].edit ? 'initial' : 'none'}} buttonFunction={() => this.props.activateContent(this.props.index, contArray)} buttonType='Margin'><FontAwesomeIcon icon="columns" /></Button>
+        <Button display={this.props.sections[this.props.index].edit ? 'initial' : 'none'} buttonFunction={() => this.props.activateContent(this.props.index, contArray)} buttonType='Margin'><FontAwesomeIcon icon="columns" /></Button>
       </div>
       
       

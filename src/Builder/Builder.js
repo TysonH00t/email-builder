@@ -6,6 +6,7 @@ import Section from "../Sections/Section/Section";
 import Text from "../Components/Text/Text";
 import "./Builder.css";
 import Button from '../Components/Button/Button';
+import ConvertToHTML from '../Components/ConvertToHTML/ConvertToHTML';
 // import Editor from '../Components/Text/myEditor/myEditor';
 // import TextEditor from '../Components/Text/TextEditor/TextEditor';
 
@@ -14,10 +15,6 @@ import { connect } from 'react-redux';
 import * as actionTypes from '../store/actions';
 
 class Builder extends Component {
-  state = {
-    gridShowing: false,
-    Sections: []
-  };
 
   //Show or hide NewContainer
   showGrid = () => {
@@ -29,6 +26,8 @@ class Builder extends Component {
   render() {
     let sectionGrid = null;
     let content = null;
+
+    
 
     //Show text editor
     if (this.props.contentShow) {
@@ -57,6 +56,7 @@ class Builder extends Component {
             {sectionGrid}
           </div>
         </div>
+        <ConvertToHTML />
       </div>
     );
   }

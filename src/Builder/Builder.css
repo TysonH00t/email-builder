@@ -13,21 +13,26 @@
 }
 
 .container {
-  padding-top: 20px;
+  padding-top: 40px;
   width: 360px;
   margin: 0 auto;
 }
 
 h1 {
 font-size: 37px;
+margin: 0;
+
 }
 
 h2 {
 font-size: 28px;
+margin: 0;
 }
 
 h3 {
 font-size: 20px;
+margin: 0;
+
 }
 
 p {

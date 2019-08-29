@@ -50,14 +50,14 @@ class Section extends Component {
     let SecDiv = null;
     //Setting max and mins for each slider depending on where the other slider is
     if (
-      this.state.xPos > 101 &&
+      this.state.xPos > 50 &&
       Number(this.state.yPos) > 1 &&
-      Number(this.state.xPos) - Number(this.state.yPos) < 205 &&
-      Number(this.state.xMax) !== 103
+      Number(this.state.xPos) - Number(this.state.yPos) < 102 &&
+      Number(this.state.xMax) !== 51
     ) {
-      this.setState({ xMax: 103 });
+      this.setState({ xMax: 51 });
     } else if (
-      Number(this.state.xPos) < 101 &&
+      Number(this.state.xPos) < 50 &&
       Number(this.state.yPos) > 0 &&
       Number(this.state.xMax) !== 0
     ) {
@@ -66,17 +66,17 @@ class Section extends Component {
     if (
       this.state.xPos < 0 &&
       Number(this.state.yPos) < 1 &&
-      Number(this.state.xPos) - Number(this.state.yPos) < 205 &&
-      Number(this.state.xMax) !== -103
+      Number(this.state.xPos) - Number(this.state.yPos) < 102 &&
+      Number(this.state.xMax) !== -51
     ) {
-      this.setState({ xMax: -103 });
+      this.setState({ xMax: -51 });
     }
     //Setting up a switch to decide how many Content pieces will be contained in this Section
     switch (this.props.division) {
       case "1":
         SecDiv = (
           <div className="outer"  style={{background: color}}>
-            <div className="whole"  style={{background: color, paddingTop: this.props.sections[this.props.index].content[0].margin ? '0' : '25px'}}>
+            <div className="whole"  style={{background: color, padding: this.props.sections[this.props.index].content[0].margin ? '0' : '25px', width: this.props.sections[this.props.index].content[0].margin ? '640px' : '590px'}}>
               {/* <Text /> */}
               <Content cIndex={0} cNum={1} index={this.props.index} />
             </div>
@@ -87,7 +87,7 @@ class Section extends Component {
         SecDiv = (
           <div style={{paddingTop: this.state.sliderActive ? '0px' : '0px', background: color}} className="outer">
             <div
-              style={{ width: Number(this.state.xPos) + 270, background: 'color' }}
+              style={{ width: this.props.sections[this.props.index].content[0].margin ? Number(this.state.xPos) + 320 :  Number(this.state.xPos) + 270 , background: color, padding: this.props.sections[this.props.index].content[0].margin ? '0' : '25px' }}
               className="half"
             >
             {!this.state.sliderActive ? null : <Measure>{Number(this.state.xPos) + 270} px</Measure>}
@@ -96,7 +96,7 @@ class Section extends Component {
               <Content cIndex={0} cNum={2} index={this.props.index} />
             </div>
             <div className="ground">
-              <div style={{display: !this.props.sections[this.props.index].edit ? 'none': 'initial'}} className="halfWidth">
+              <div style={{display: !this.props.sections[this.props.index].edit ? 'none': 'initial', }} className="halfWidth">
                 <input
                   onMouseDown={this.activateMeasure}
                   onMouseUp={this.activateMeasure}
@@ -106,10 +106,11 @@ class Section extends Component {
                   min={-170}
                   max={170}
                   type="range"
+                  // style={{top: this.props.sections[this.props.index].content[0].margin ? '90px' : '115px'}}
                 />
               </div>
             </div>
-            <div style={{ width: -this.state.xPos + 270, background: color }} className="half">
+            <div style={{ width: this.props.sections[this.props.index].content[1].margin ? -this.state.xPos + 320 : -this.state.xPos + 270, background: color, padding: this.props.sections[this.props.index].content[1].margin ? '0' : '25px' }} className="half">
             {!this.state.sliderActive ? null : <Measure>{-this.state.xPos + 270} px</Measure>}
               {/* <Text /> */}
               <Content cIndex={1} cNum={2} index={this.props.index} />
@@ -119,12 +120,12 @@ class Section extends Component {
         break;
       case "3":
         SecDiv = (
-          <div style={{paddingTop: this.state.sliderActive ? '21px' : '50px', background: color}} className="outer">
+          <div style={{paddingTop: this.state.sliderActive ? '0px' : '0px', background: color}} className="outer">
             <div
-              style={{ width: Number(this.state.xPos) + 360, background: color }}
+              style={{ width: this.props.sections[this.props.index].content[0].margin ? Number(this.state.xPos) + 213 : Number(this.state.xPos) + 163, background: color, padding: this.props.sections[this.props.index].content[0].margin ? '0' : '25px' }}
               className="third"
             >
-            {!this.state.sliderActive ? null : <Measure>{Number(this.state.xPos) + 360} px</Measure>}
+            {!this.state.sliderActive ? null : <Measure>{this.props.sections[this.props.index].content[0].margin ? Number(this.state.xPos) + 213 : Number(this.state.xPos) + 163} px</Measure>}
               {/* <Text /> */}
               <Content cIndex={0} cNum={3} index={this.props.index} />
             </div>
@@ -135,22 +136,22 @@ class Section extends Component {
                 onMouseUp={this.activateMeasure}
                   onChange={this.xSlide}
                   className="thirdDividerL"
-                  step={2}
-                  min={-205}
-                  max={103 + this.state.xMax}
+                  step={1}
+                  min={-77}
+                  max={56 + this.state.xMax}
                   defaultValue={0}
-                  style={{ width: 308 + this.state.xMax }}
+                  style={{ width: 135 + this.state.xMax }}
                   type="range"
                 />
               </div>
             </div>
             <div
               style={{
-                width: 360 + Number(this.state.yPos) - Number(this.state.xPos), background: color
+                width: this.props.sections[this.props.index].content[1].margin ? 213 + Number(this.state.yPos) - Number(this.state.xPos) : 163 + Number(this.state.yPos) - Number(this.state.xPos), background: color, padding: this.props.sections[this.props.index].content[1].margin ? '0' : '25px'
               }}
               className="third"
             >
-            {!this.state.sliderActive ? null : <Measure>{360 + Number(this.state.yPos) - Number(this.state.xPos)} px</Measure>}
+            {!this.state.sliderActive ? null : <Measure>{this.props.sections[this.props.index].content[1].margin ? 213 + Number(this.state.yPos) - Number(this.state.xPos) : 163 + Number(this.state.yPos) - Number(this.state.xPos)} px</Measure>}
               
               {/* <Text /> */}
               <Content cIndex={1} cNum={3} index={this.props.index} />
@@ -162,17 +163,17 @@ class Section extends Component {
                 onMouseUp={this.activateMeasure}
                   onChange={this.ySlide}
                   className="thirdDividerR"
-                  step={2}
-                  min={-(102 + -this.state.xMax)}
-                  max={205}
+                  step={1}
+                  min={-(56 + -this.state.xMax)}
+                  max={77}
                   defaultValue={0}
-                  style={{ width: 307 + -this.state.xMax }}
+                  style={{ width: 134 + -this.state.xMax }}
                   type="range"
                 />
               </div>
             </div>
-            <div style={{ width: 360 - this.state.yPos, background: color }} className="third">
-            {!this.state.sliderActive ? null : <Measure>{360 - this.state.yPos} px</Measure>}
+            <div style={{ width: this.props.sections[this.props.index].content[2].margin ? 213 - this.state.yPos : 163 - this.state.yPos, background: color, padding: this.props.sections[this.props.index].content[2].margin ? '0' : '25px' }} className="third">
+            {!this.state.sliderActive ? null : <Measure>{this.props.sections[this.props.index].content[2].margin ? 213 - this.state.yPos : 163 - this.state.yPos} px</Measure>}
               {/*  */}
               {/* <Text /> */}
               <Content cIndex={2} cNum={3} index={this.props.index} />
