@@ -73,7 +73,7 @@
 
 .thirdDividerL {
   position: absolute;
-  top: 115px;
+  top: 0px;
   height: 100%;
   left: 133px;
   z-index: 1;
@@ -82,7 +82,7 @@
 
 .thirdDividerR {
   position: absolute;
-  top: 115px;
+  top: 0px;
   height: 100%;
   right: 133px;
   z-index: 1;

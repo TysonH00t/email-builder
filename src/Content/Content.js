@@ -29,7 +29,6 @@ class Content extends Component {
       for (let i = 0; i < this.props.cNum; i++) {
         if (i === this.props.cIndex) {
           contArray.push({ display: true, content: this.props.currentText, alignment: this.props.sections[this.props.index].content[i].alignment, margin: !this.props.sections[this.props.index].content[i].margin});
-          //contArray.push({ display: false, content: "" });
         } else {
           
             contArray.push({ display: true, content: this.props.sections[this.props.index].content[i].content, alignment: this.props.sections[this.props.index].content[i].alignment, margin: this.props.sections[this.props.index].content[i].margin });
@@ -39,20 +38,11 @@ class Content extends Component {
 
     let content = this.props.sections[this.props.index].edit ? <div>
       <button onClick={showContent} className="content">+</button>
-      {/* <button style={{width: this.props.sections[this.props.index].content[this.props.cIndex].margin ? '640px' : '590px', margin: this.props.sections[this.props.index].content[this.props.cIndex].margin ? '0' : '0px 25px 25px 25px'}} onClick={showContent} className="content">+</button> */}
       <Button style={{display: this.props.sections[this.props.index].edit ? 'initial' : 'none'}} buttonFunction={() => this.props.activateContent(this.props.index, contArray)} buttonType='Margin'><FontAwesomeIcon icon="columns" /></Button>
     </div> : <div></div>
 
     let tempContent = this.props.sections[this.props.index];
     if (tempContent.content[this.props.cIndex].content !== '') {
-      // content = new Html ({
-      //   rules: rules,
-      //   defaultBlock: String | Object,
-      //   parseHtml:
-      // })
-      // content = Html.serialize(this.props.currentText.value);
-      // content = html.serialize(this.props.currentText.value);
-      // content = String(html.serialize(this.props.currentText.value));
       content = <div>
         <div style={{textAlign: this.props.sections[this.props.index].content[this.props.cIndex] == '' ? 'left' : this.props.sections[this.props.index].content[this.props.cIndex].alignment}} className="ContentDisplayed">
         {/* <div style={{textAlign: this.props.sections[this.props.index].content[this.props.cIndex] == '' ? 'left' : this.props.sections[this.props.index].content[this.props.cIndex].alignment, width: this.props.sections[this.props.index].content[this.props.cIndex].margin ? '640px' : '590px', margin: this.props.sections[this.props.index].content[this.props.cIndex].margin ? '0' : '0px 25px 25px 25px'}} className="ContentDisplayed"> */}
@@ -60,41 +50,89 @@ class Content extends Component {
           <div dangerouslySetInnerHTML=
           {{__html: convertToHTML({
             styleToHTML: style => {
-              // if (style === "BOLD") {
-              //   return <strong />;
-              // }
-              // if (style === "ITALIC") {
-              //   return <em />;
-              // }
-              // if (style === "UNDERLINE") {
-              //   return <span style={{ textDecoration: 'underline' }} />;
-              // }
+              if (style === "BOLD") {
+                return <strong />;
+              }
+              if (style === "ITALIC") {
+                return <em />;
+              }
+              if (style === "UNDERLINE") {
+                return <span style={{ textDecoration: 'underline' }} />;
+              }
               if (style === "blue") {
-                return <span style={{ color: '#0078D7' }} />;
+                return <span style={{ color: "#0078D7" }} />;
               }
               if (style === "white") {
-                return <span style={{ color: 'white' }} />;
+                return <span style={{ color: "white" }} />;
               }
             },
             blockToHTML: block => {
-              console.log('block' + block.type)
-              if (block.type === "PARAGRAPH") {
-                console.log('paragraph')
-                return { element: <p />, empty: '' };
+              if (block.type === "header-one") {
+                return {
+                  start:
+                    '<h1 style="margin: 0px; font-size:37px; font-family: &#39;Segoe UI&#39;; color: #505050;text-align: ' +
+                    this.props.sections[this.props.index].content[this.props.cIndex].alignment +
+                    ';">',
+                  end: "</h1>",
+                  empty: ""
+                };
               }
-              // if (block.type === "H1") {
-              //   return { element: <h1 />, empty: <br /> };
-              // }
-              // if (block.type === "H2") {
-              //   return { element: <h2 />, empty: <br /> };
-              // }
-              // if (block.type === "H3") {
-              //   return { element: <h3 />, empty: <br /> };
-              // }
+              if (block.type === "header-two") {
+                return {
+                  start:
+                    '<h2 style="margin: 0px; font-size:28px; font-family: &#39;Segoe UI&#39;; color: #505050;text-align: ' +
+                    this.props.sections[this.props.index].content[this.props.cIndex].alignment +
+                    ';">',
+                  end: "</h2>",
+                  empty: ""
+                };
+              }
+              if (block.type === "header-three") {
+                return {
+                  start:
+                    '<h3 style="margin: 0px; font-size:20px; font-family: &#39;Segoe UI&#39;; color: #505050;text-align: ' +
+                    this.props.sections[this.props.index].content[this.props.cIndex].alignment +
+                    ';">',
+                  end: "</h3>",
+                  empty: ""
+                };
+              }
+              if (block.type === "paragraph") {
+                return {
+                  start:
+                    '<p style="margin: 0px; font-size:16px; font-family: &#39;Segoe UI&#39;; color: #505050;text-align: ' +
+                    this.props.sections[this.props.index].content[this.props.cIndex].alignment +
+                    ';">',
+                  end: "</p>",
+                  empty: ""
+                };
+              }
+              if (block.type === "unordered-list-item") {
+                return {
+                  start:
+                    '<li style="margin: 0px; font-size:16px font-family: &#39;Segoe UI&#39;; color: #505050;">',
+                  end: "</li>",
+                  empty: "",
+                  nest: <ul />,
+                };
+              }
+              if (block.type === "ordered-list-item") {
+                  return {
+                    start:
+                      '<li style="margin: 0px; font-size:16px font-family: &#39;Segoe UI&#39;; color: #505050;">',
+                    end: "</li>",
+                    empty: "",
+                    nest: <ol />
+                  };
+                }
               if (block.type === "unstyled") {
                 return {
-                  start: "",
-                  end: ""
+                  start:
+                    '<p style="margin: 0px; font-size:16px font-family: &#x27Segoe UI&#x27; color: #505050;text-align:' +
+                    this.props.sections[this.props.index].content[this.props.cIndex].alignment +
+                    '">',
+                  end: "</p>",
+                  empty: ""
                 };
               }
               if (block.type === "atomic") {
@@ -105,7 +143,6 @@ class Content extends Component {
               }
             },
             entityToHTML: (entity, originalText) => {
-              console.log(entity)
               if (entity.type === "LINK") {
                 return <a href={entity.data.url}>{originalText}</a>;
               }
@@ -118,13 +155,7 @@ class Content extends Component {
         </div>
         <Button display={this.props.sections[this.props.index].edit ? 'initial' : 'none'} buttonFunction={() => this.props.activateContent(this.props.index, contArray)} buttonType='Margin'><FontAwesomeIcon icon="columns" /></Button>
       </div>
-      
-      
-      
 
-      // content = <p>
-      //   {tempContent.content[this.props.cIndex].content}
-      // </p>
     }
 
     return (

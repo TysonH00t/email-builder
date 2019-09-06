@@ -34,6 +34,28 @@ class Section extends Component {
 
   activateMeasure = () => {
     this.setState({ sliderActive: !this.state.sliderActive })
+    this.updateSection();
+  }
+
+  updateSection = () => {
+    let width = [];
+    switch (this.props.division){
+      case "1":
+      width = [640];
+      break;
+      case "2":
+      width = [Number(this.state.xPos) + 320, 
+              -this.state.xPos + 320
+              ];
+      break;
+      case "3":
+      width = [Number(this.state.xPos) + 213,
+      213 + Number(this.state.yPos) - Number(this.state.xPos),
+      213 - this.state.yPos
+    ];
+      break;
+    }
+    this.props.onUpdateSection(this.props.index, this.props.sections[this.props.index].backgroundColor, width)
   }
 
   onDragOver = (e) => {
@@ -43,6 +65,10 @@ class Section extends Component {
  onDragStart = (e, index, props) => {
   props.onSectionDrag(true);
   e.dataTransfer.setData("id", index);
+}
+
+componentDidMount(){
+  this.updateSection();
 }
 
   render() {
@@ -196,7 +222,7 @@ class Section extends Component {
         <div className='MovePosition'>
         <Button buttonType='Move' buttonDraggable='true' buttonDragEnd={() => this.props.onSectionDrag(false)} buttonDragStart={(e) => this.onDragStart(e, this.props.index, this.props)}><FontAwesomeIcon icon="arrows-alt" /></Button>
         </div>
-        <Colors buttonFunction={(color) => this.props.onChangeColor(this.props.index, color)} index={this.props.index} />
+        <Colors buttonFunction={(color) => this.props.onUpdateSection(this.props.index, color, this.props.sections[this.props.index].width)} index={this.props.index} />
         <Button buttonFunction={() => this.props.onSectionRemoved(this.props.index)} buttonType='X'>X</Button>
         <Button buttonFunction={() => this.props.onEdit(this.props.index, false)} buttonType='Check'><FontAwesomeIcon icon="check-square" /></Button>
       </div>
@@ -220,7 +246,7 @@ const mapDispatchToProps = dispatch => {
     onMoveSection: (e, ind) => dispatch({type: actionTypes.MOVE_SECTION, e: e, ind: ind}),
     onSectionRemoved: (secIndex) => dispatch({type: actionTypes.REMOVE_SECTION, index: secIndex}),
     onEdit: (index, edit) => dispatch({type: actionTypes.EDITABLE,index: index, edit: edit}),
-    onChangeColor: (index, color) => dispatch({type: actionTypes.UPDATE_COLOR, index: index, color: color}),
+    onUpdateSection: (index, color, width) => dispatch({type: actionTypes.UPDATE_SECTION, index: index, color: color, width: width}),
     onSectionDrag: (bool) => dispatch({type: actionTypes.SECTION_DRAG, bool: bool}),
   }
 }

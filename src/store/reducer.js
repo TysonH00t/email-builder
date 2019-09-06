@@ -81,6 +81,7 @@ const reducer = (state = initialState, action) => {
                             edit: true,
                             content: action.contentNum,
                             backgroundColor: 'white',
+                            width: [590],
                           },
             ...state.sections.slice(state.sections.length)],
             
@@ -139,7 +140,7 @@ const reducer = (state = initialState, action) => {
             })]
         }
 
-        case actionTypes.UPDATE_COLOR: return {
+        case actionTypes.UPDATE_SECTION: return {
             ...state,
             sections: [...state.sections.map((item, index) => {
                 if (index !== action.index) {
@@ -147,7 +148,7 @@ const reducer = (state = initialState, action) => {
                 }
                 return {
                     ...item,
-                     index: state.sections[action.index].index, division: state.sections[action.index].division, edit: state.sections[action.index].edit, content: state.sections[action.index].content, backgroundColor: action.color
+                     index: state.sections[action.index].index, division: state.sections[action.index].division, edit: state.sections[action.index].edit, content: state.sections[action.index].content, backgroundColor: action.color, width: action.width
                     //{index: 0, division: 0, content: action.cArray}
                 }
             })]
