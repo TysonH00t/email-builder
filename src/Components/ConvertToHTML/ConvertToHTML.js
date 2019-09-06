@@ -8,7 +8,7 @@ class ConvertToHTML extends Component {
   render() {
 
     let innerText = ('' + this.props.Secs.map((section, Sindex) =>
-    '<tr> <td> <div align=center> <table cellspacing=0 cellpadding=0> <tr> <tdwidth=640> <table border=0 cellspacing=0 cellpadding=0width=100% style="background: ' + this.props.Secs[Sindex].backgroundColor + ';"> <tr> <td width=640> <table border=0 cellspacing=0 cellpadding=0align=left width=640> <tr>' +
+    '<tr> <td> <div align=center> <table cellspacing=0 cellpadding=0> <tr> <tdwidth=640> <table border=0 cellspacing=0 cellpadding=0 width=100% style="background: ' + this.props.Secs[Sindex].backgroundColor + ';"> <tr> <td width=640> <table border=0 cellspacing=0 cellpadding=0 align=left width=640> <tr>' +
     this.props.Secs[Sindex].content.map((content, Cindex) =>
   
     this.props.Secs[Sindex].content[Cindex].content.editorState == undefined ? null : ('<td width=' +
