@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/email-builder/static/css/main.d47993e5.chunk.css",
+    "main.js": "/email-builder/static/js/main.5ff78873.chunk.js",
+    "main.js.map": "/email-builder/static/js/main.5ff78873.chunk.js.map",
+    "runtime~main.js": "/email-builder/static/js/runtime~main.769bb8e9.js",
+    "runtime~main.js.map": "/email-builder/static/js/runtime~main.769bb8e9.js.map",
+    "static/css/2.a17ebd6e.chunk.css": "/email-builder/static/css/2.a17ebd6e.chunk.css",
+    "static/js/2.4fc77f6d.chunk.js": "/email-builder/static/js/2.4fc77f6d.chunk.js",
+    "static/js/2.4fc77f6d.chunk.js.map": "/email-builder/static/js/2.4fc77f6d.chunk.js.map",
+    "index.html": "/email-builder/index.html",
+    "precache-manifest.4243d71b68944bc0eacc3d084a0443c6.js": "/email-builder/precache-manifest.4243d71b68944bc0eacc3d084a0443c6.js",
+    "service-worker.js": "/email-builder/service-worker.js",
+    "static/css/2.a17ebd6e.chunk.css.map": "/email-builder/static/css/2.a17ebd6e.chunk.css.map",
+    "static/css/main.d47993e5.chunk.css.map": "/email-builder/static/css/main.d47993e5.chunk.css.map"
+  }
+}
