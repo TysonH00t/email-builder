@@ -2,6 +2,7 @@
   "name": "email-builder",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://tysonh00t.github.io/email-builder/",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.17",
     "@fortawesome/free-solid-svg-icons": "^5.8.1",
@@ -9,6 +10,7 @@
     "draft-convert": "^2.1.5",
     "draft-js": "^0.10.5",
     "draft-js-plugins-editor": "^2.1.1",
+    "gh-pages": "^2.1.1",
     "immutable": "^4.0.0-rc.12",
     "npm": "^6.10.0",
     "react": "^16.8.6",
@@ -23,6 +25,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
